@@ -8,12 +8,12 @@ import {
   ArrowRight,
   CheckCircle2,
   ClipboardCheck,
-  Clock,
   Mail,
   MapPin,
   MessageSquare,
   Phone,
   ShieldCheck,
+  Sparkles,
   TreePine,
   Truck,
   Wrench,
@@ -31,36 +31,47 @@ const services = [
     title: "Tree Removal",
     description:
       "Safe removal of dead, damaged, leaning, or unwanted trees with care around homes, fences, driveways, utilities, and landscaping.",
+    bestFor: "Dead trees, leaning trees, storm damage, and property clearing.",
     icon: TreePine,
   },
   {
     title: "Tree Trimming & Pruning",
     description:
       "Professional trimming and pruning to reduce overgrowth, improve clearance, shape trees, and help maintain healthier properties.",
+    bestFor:
+      "Overgrown limbs, roof clearance, branches near structures, and routine maintenance.",
     icon: ClipboardCheck,
   },
   {
     title: "Stump Grinding",
     description:
       "Stump grinding for old or freshly cut stumps so your yard is safer, cleaner, and easier to maintain.",
+    bestFor:
+      "Leftover stumps, trip hazards, lawn cleanup, and usable yard space.",
     icon: Wrench,
   },
   {
     title: "Storm Damage Cleanup",
     description:
       "Cleanup for fallen limbs, broken branches, and tree hazards after wind, rain, or rough New Mexico weather.",
+    bestFor:
+      "Fallen branches, urgent cleanup, blocked access, and weather-related hazards.",
     icon: AlertTriangle,
   },
   {
     title: "Tree Assessments",
     description:
       "Property walkthroughs to identify risky trees, dead limbs, weak branches, and maintenance needs before they become bigger problems.",
+    bestFor:
+      "Risky trees, dead limbs, weak branches, and prevention before damage happens.",
     icon: ShieldCheck,
   },
   {
     title: "Property Cleanup",
     description:
       "Clean, professional job-site cleanup after tree work so your property looks safe, neat, and finished.",
+    bestFor:
+      "Brush removal, tree debris, post-job cleanup, and cleaner outdoor spaces.",
     icon: Truck,
   },
 ];
@@ -80,6 +91,14 @@ const trustPoints = [
   "Removal, trimming, stump grinding, and storm cleanup",
 ];
 
+const proofItems = [
+  "Tree Removal",
+  "Trimming & Pruning",
+  "Storm Cleanup",
+  "Stump Grinding",
+  "Free Estimates",
+];
+
 const processSteps = [
   {
     title: "Send the details",
@@ -95,6 +114,27 @@ const processSteps = [
     title: "Get the work handled",
     description:
       "The crew completes the work with a focus on safety, property protection, and clean results.",
+  },
+];
+
+const whyChoose = [
+  {
+    title: "Care around your property",
+    description:
+      "Tree work near homes, fences, driveways, utilities, and landscaping should be handled with planning and attention.",
+    icon: ShieldCheck,
+  },
+  {
+    title: "Clear communication",
+    description:
+      "Customers can call, text, or send a quote request with job details, photos, location, and urgency.",
+    icon: MessageSquare,
+  },
+  {
+    title: "Clean finished results",
+    description:
+      "The goal is not just to finish the tree work, but to leave the property safer, cleaner, and easier to maintain.",
+    icon: Sparkles,
   },
 ];
 
@@ -190,9 +230,26 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-stone-950 text-white">
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(16,185,129,0.20),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(5,150,105,0.14),transparent_32%),linear-gradient(to_bottom,#06120d,#0c0a09_70%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(16,185,129,0.20),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(5,150,105,0.14),transparent_32%),linear-gradient(to_bottom,#06120d,#0c0a09_72%)]" />
 
         <div className="relative mx-auto max-w-7xl px-5 py-5 sm:px-6 lg:px-8">
+          <div className="mb-4 hidden items-center justify-between rounded-full border border-white/10 bg-white/[0.04] px-5 py-3 text-sm text-stone-300 backdrop-blur lg:flex">
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="h-4 w-4 text-emerald-300" />
+              <span>
+                Free estimates for tree removal, trimming, stump grinding, and
+                cleanup
+              </span>
+            </div>
+
+            <a
+              href={`tel:${phoneNumber}`}
+              className="font-black text-emerald-300 transition hover:text-emerald-200"
+            >
+              {phoneNumber}
+            </a>
+          </div>
+
           <header className="flex items-center justify-between rounded-[2rem] border border-white/10 bg-black/35 px-4 py-4 shadow-2xl shadow-black/30 backdrop-blur-xl sm:px-6">
             <Link href="/" className="flex items-center gap-3">
               <div className="relative h-16 w-16 shrink-0 sm:h-20 sm:w-20">
@@ -283,6 +340,10 @@ export default function Home() {
                 </a>
               </div>
 
+              <p className="mt-5 text-sm font-medium text-stone-400">
+                Free estimates • Residential & commercial • Southern New Mexico
+              </p>
+
               <div className="mt-10 grid gap-3 text-sm text-stone-300 sm:grid-cols-2">
                 {trustPoints.map((point) => (
                   <div key={point} className="flex items-start gap-3">
@@ -327,12 +388,26 @@ export default function Home() {
               </div>
             </div>
           </div>
+
+          <div className="mb-10 rounded-[2rem] border border-white/10 bg-white/[0.05] p-4 shadow-2xl shadow-black/20 backdrop-blur">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+              {proofItems.map((item) => (
+                <div
+                  key={item}
+                  className="flex items-center gap-2 rounded-2xl bg-black/20 px-4 py-3 text-sm font-black text-stone-100"
+                >
+                  <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-300" />
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
       <section
         id="services"
-        className="bg-stone-100 px-5 py-24 text-stone-950 sm:px-6 lg:px-8"
+        className="bg-[#f7f4ed] px-5 py-24 text-stone-950 sm:px-6 lg:px-8"
       >
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
@@ -360,7 +435,7 @@ export default function Home() {
               return (
                 <article
                   key={service.title}
-                  className="group rounded-[2rem] border border-stone-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-emerald-200 hover:shadow-xl"
+                  className="group flex min-h-full flex-col rounded-[2rem] border border-stone-200/80 bg-[#fffdf8] p-7 shadow-sm transition hover:-translate-y-1 hover:border-emerald-200 hover:shadow-xl"
                 >
                   <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-800 transition group-hover:bg-emerald-400 group-hover:text-stone-950">
                     <Icon className="h-7 w-7" />
@@ -371,6 +446,15 @@ export default function Home() {
                   <p className="mt-3 leading-7 text-stone-600">
                     {service.description}
                   </p>
+
+                  <div className="mt-6 rounded-2xl border border-stone-200/70 bg-[#f7f4ed] p-4">
+                    <p className="text-xs font-black uppercase tracking-[0.18em] text-emerald-700">
+                      Best for
+                    </p>
+                    <p className="mt-2 text-sm leading-6 text-stone-600">
+                      {service.bestFor}
+                    </p>
+                  </div>
                 </article>
               );
             })}
@@ -380,7 +464,7 @@ export default function Home() {
 
       <section
         id="process"
-        className="bg-white px-5 py-24 text-stone-950 sm:px-6 lg:px-8"
+        className="bg-[#fffaf2] px-5 py-24 text-stone-950 sm:px-6 lg:px-8"
       >
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <div className="relative overflow-hidden rounded-[2rem] bg-stone-950 shadow-2xl">
@@ -426,7 +510,7 @@ export default function Home() {
               {processSteps.map((step, index) => (
                 <div
                   key={step.title}
-                  className="rounded-3xl border border-stone-200 bg-stone-50 p-6"
+                  className="rounded-3xl border border-stone-200/80 bg-white/80 p-6 shadow-sm backdrop-blur"
                 >
                   <div className="flex gap-4">
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-emerald-700 text-sm font-black text-white">
@@ -443,6 +527,50 @@ export default function Home() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[linear-gradient(135deg,#f7f4ed_0%,#eef7ef_55%,#f7f4ed_100%)] px-5 py-24 text-stone-950 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
+            <div>
+              <p className="text-sm font-black uppercase tracking-[0.22em] text-emerald-700">
+                Why Choose High Point
+              </p>
+
+              <h2 className="mt-3 text-4xl font-black tracking-tight sm:text-5xl">
+                Professional service without making the process complicated.
+              </h2>
+            </div>
+
+            <p className="max-w-2xl text-lg leading-8 text-stone-700 lg:ml-auto">
+              Tree work can feel stressful when safety, property damage, or
+              storm cleanup is involved. High Point keeps the experience clear,
+              practical, and focused on the property.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-5 lg:grid-cols-3">
+            {whyChoose.map((item) => {
+              const Icon = item.icon;
+
+              return (
+                <article
+                  key={item.title}
+                  className="rounded-[2rem] border border-white/80 bg-white/80 p-7 shadow-sm backdrop-blur transition hover:-translate-y-1 hover:shadow-xl"
+                >
+                  <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-stone-950 text-emerald-300">
+                    <Icon className="h-7 w-7" />
+                  </div>
+
+                  <h3 className="text-2xl font-black">{item.title}</h3>
+                  <p className="mt-3 leading-7 text-stone-600">
+                    {item.description}
+                  </p>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -487,32 +615,34 @@ export default function Home() {
               </div>
 
               <div className="mt-8">
-  <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-    <span className="text-3xl font-black leading-none tracking-tight text-white sm:text-4xl">
-      Serving
-    </span>
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+                  <span className="text-3xl font-black leading-none tracking-tight text-white sm:text-4xl">
+                    Serving
+                  </span>
 
-    <span className="relative block h-[44px] min-w-[320px] overflow-hidden sm:h-[52px]">
-      {serviceAreas.map((area, index) => (
-        <span
-          key={area}
-          className={`absolute left-0 top-1/2 -translate-y-1/2 whitespace-nowrap text-3xl font-black leading-none tracking-tight text-emerald-300 transition-all duration-700 sm:text-4xl ${
-            index === activeAreaIndex
-              ? "opacity-100"
-              : "translate-y-2 opacity-0"
-          }`}
-        >
-          {area}
-        </span>
-      ))}
-    </span>
-  </div>
+                  <span className="relative block h-[44px] min-w-[320px] overflow-hidden sm:h-[52px]">
+                    {serviceAreas.map((area, index) => (
+                      <span
+                        key={area}
+                        className={`absolute left-0 top-1/2 -translate-y-1/2 whitespace-nowrap text-3xl font-black leading-none tracking-tight text-emerald-300 transition-all duration-700 sm:text-4xl ${
+                          index === activeAreaIndex
+                            ? "opacity-100"
+                            : "translate-y-2 opacity-0"
+                        }`}
+                      >
+                        {area}
+                      </span>
+                    ))}
+                  </span>
+                </div>
 
-  <p className="mt-5 max-w-xl text-sm leading-7 text-stone-400">
-    Not sure if your property is within range? Send a quote request with your
-    city or address and High Point Tree Service can confirm availability.
-  </p>
-</div>
+                <p className="mt-5 max-w-xl text-sm leading-7 text-stone-400">
+                  Not sure if your property is within range? Send a quote
+                  request with your city or address and High Point Tree Service
+                  can confirm availability.
+                </p>
+              </div>
+
               <div className="mt-8 border-t border-white/10 pt-6">
                 <p className="text-xs font-black uppercase tracking-[0.18em] text-stone-500">
                   Current Service Areas
@@ -540,7 +670,7 @@ export default function Home() {
 
       <section
         id="quote"
-        className="bg-stone-100 px-5 py-24 text-stone-950 sm:px-6 lg:px-8"
+        className="bg-[#f7f4ed] px-5 py-24 text-stone-950 sm:px-6 lg:px-8"
       >
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
           <div>
@@ -561,7 +691,7 @@ export default function Home() {
             <div className="mt-8 grid gap-4">
               <a
                 href={`tel:${phoneNumber}`}
-                className="group flex items-center gap-4 rounded-3xl bg-white p-5 font-bold shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                className="group flex items-center gap-4 rounded-3xl border border-stone-200/80 bg-[#fffdf8] p-5 font-bold shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
               >
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-800 transition group-hover:bg-emerald-400 group-hover:text-stone-950">
                   <Phone className="h-6 w-6" />
@@ -577,7 +707,7 @@ export default function Home() {
 
               <a
                 href={`sms:${smsNumber}`}
-                className="group flex items-center gap-4 rounded-3xl bg-white p-5 font-bold shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                className="group flex items-center gap-4 rounded-3xl border border-stone-200/80 bg-[#fffdf8] p-5 font-bold shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
               >
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-800 transition group-hover:bg-emerald-400 group-hover:text-stone-950">
                   <MessageSquare className="h-6 w-6" />
@@ -593,7 +723,7 @@ export default function Home() {
 
               <a
                 href={`mailto:${emailAddress}`}
-                className="group flex items-center gap-4 rounded-3xl bg-white p-5 font-bold shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                className="group flex items-center gap-4 rounded-3xl border border-stone-200/80 bg-[#fffdf8] p-5 font-bold shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
               >
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-800 transition group-hover:bg-emerald-400 group-hover:text-stone-950">
                   <Mail className="h-6 w-6" />
@@ -611,7 +741,7 @@ export default function Home() {
 
           <form
             onSubmit={handleSubmit}
-            className="rounded-[2rem] border border-stone-200 bg-white p-6 text-stone-950 shadow-xl sm:p-8"
+            className="rounded-[2rem] border border-stone-200/90 bg-[#fffdf8] p-6 text-stone-950 shadow-xl sm:p-8"
           >
             <div className="mb-7">
               <p className="text-sm font-black uppercase tracking-[0.18em] text-emerald-700">
@@ -642,7 +772,7 @@ export default function Home() {
                   onChange={handleChange}
                   required
                   placeholder="Your name"
-                  className="w-full rounded-xl border border-stone-300 px-4 py-3 outline-none transition focus:border-emerald-600 focus:ring-4 focus:ring-emerald-100"
+                  className="w-full rounded-xl border border-stone-300 bg-white px-4 py-3 outline-none transition focus:border-emerald-600 focus:ring-4 focus:ring-emerald-100"
                 />
               </div>
 
@@ -662,7 +792,7 @@ export default function Home() {
                   onChange={handleChange}
                   required
                   placeholder="Best number"
-                  className="w-full rounded-xl border border-stone-300 px-4 py-3 outline-none transition focus:border-emerald-600 focus:ring-4 focus:ring-emerald-100"
+                  className="w-full rounded-xl border border-stone-300 bg-white px-4 py-3 outline-none transition focus:border-emerald-600 focus:ring-4 focus:ring-emerald-100"
                 />
               </div>
 
@@ -681,7 +811,7 @@ export default function Home() {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="you@example.com"
-                  className="w-full rounded-xl border border-stone-300 px-4 py-3 outline-none transition focus:border-emerald-600 focus:ring-4 focus:ring-emerald-100"
+                  className="w-full rounded-xl border border-stone-300 bg-white px-4 py-3 outline-none transition focus:border-emerald-600 focus:ring-4 focus:ring-emerald-100"
                 />
               </div>
 
@@ -726,7 +856,7 @@ export default function Home() {
                   onChange={handleChange}
                   required
                   placeholder="City, neighborhood, or address"
-                  className="w-full rounded-xl border border-stone-300 px-4 py-3 outline-none transition focus:border-emerald-600 focus:ring-4 focus:ring-emerald-100"
+                  className="w-full rounded-xl border border-stone-300 bg-white px-4 py-3 outline-none transition focus:border-emerald-600 focus:ring-4 focus:ring-emerald-100"
                 />
               </div>
 
@@ -746,7 +876,7 @@ export default function Home() {
                   onChange={handleChange}
                   required
                   placeholder="Tell us what you need help with. Include tree size, property access, urgency, storm damage, or cleanup details."
-                  className="w-full rounded-xl border border-stone-300 px-4 py-3 outline-none transition focus:border-emerald-600 focus:ring-4 focus:ring-emerald-100"
+                  className="w-full rounded-xl border border-stone-300 bg-white px-4 py-3 outline-none transition focus:border-emerald-600 focus:ring-4 focus:ring-emerald-100"
                 />
               </div>
             </div>
@@ -774,10 +904,16 @@ export default function Home() {
               </div>
             )}
 
-            <p className="mt-4 text-center text-sm leading-6 text-stone-500">
-              For urgent storm cleanup or immediate tree concerns, calling or
-              texting is the fastest option.
-            </p>
+            <div className="mt-5 rounded-2xl border border-stone-200/80 bg-[#f7f4ed] p-4">
+              <div className="flex gap-3">
+                <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-emerald-700" />
+                <p className="text-sm leading-6 text-stone-600">
+                  Your information is only used to respond to your quote
+                  request. For urgent storm cleanup or immediate tree concerns,
+                  calling or texting is the fastest option.
+                </p>
+              </div>
+            </div>
           </form>
         </div>
       </section>
