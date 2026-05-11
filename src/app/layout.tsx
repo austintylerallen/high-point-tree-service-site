@@ -1,33 +1,51 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import LocalBusinessJsonLd from "@/components/LocalBusinessJsonLd";
+import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "High Point Tree Service LLC | Tree Service in New Mexico",
-  description:
-    "High Point Tree Service LLC provides tree removal, tree trimming, pruning, stump grinding, storm damage cleanup, and tree assessments in Las Cruces, Roswell, Ruidoso, Alamogordo, and surrounding New Mexico areas.",
-  keywords: [
-    "High Point Tree Service",
-    "tree service New Mexico",
-    "tree removal Las Cruces",
-    "tree trimming Las Cruces",
-    "stump grinding New Mexico",
-    "storm damage cleanup",
-    "tree pruning",
-    "Roswell tree service",
-    "Ruidoso tree service",
-    "Alamogordo tree service",
-  ],
-  authors: [{ name: "High Point Tree Service LLC" }],
-  openGraph: {
-    title: "High Point Tree Service LLC",
-    description:
-      "Tree removal, trimming, pruning, stump grinding, storm cleanup, and tree assessments across New Mexico.",
-    url: "https://highpointtreeservicenm.com",
-    siteName: "High Point Tree Service LLC",
-    locale: "en_US",
-    type: "website",
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default:
+      "High Point Tree Service LLC | Tree Service in Southern New Mexico",
+    template: "%s | High Point Tree Service LLC",
   },
-  metadataBase: new URL("https://highpointtreeservicenm.com"),
+  description: siteConfig.description,
+  applicationName: siteConfig.name,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    title: "High Point Tree Service LLC | Tree Service in Southern New Mexico",
+    description: siteConfig.description,
+    images: [
+      {
+        url: siteConfig.heroImage,
+        width: 1200,
+        height: 630,
+        alt: "High Point Tree Service crew member working in a tree",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "High Point Tree Service LLC | Tree Service in Southern New Mexico",
+    description: siteConfig.description,
+    images: [siteConfig.heroImage],
+  },
+  icons: {
+    icon: "/favicon.ico",
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#07120d",
 };
 
 export default function RootLayout({
@@ -37,7 +55,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <LocalBusinessJsonLd />
+        {children}
+      </body>
     </html>
   );
 }
