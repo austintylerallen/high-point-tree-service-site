@@ -6,9 +6,7 @@ import Link from "next/link";
 import {
   ArrowRight,
   CheckCircle2,
-  ClipboardCheck,
   MapPin,
-  MessageSquare,
   Phone,
   ShieldCheck,
 } from "lucide-react";
@@ -35,7 +33,7 @@ const services = [
   {
     title: "Tree trimming and pruning",
     description:
-      "For overgrown branches, roof clearance, walkways, driveways, fences, and routine property maintenance.",
+      "For overgrown branches, roof clearance, walkways, fences, and routine property maintenance.",
   },
   {
     title: "Stump grinding",
@@ -101,7 +99,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-[#07120d] text-white">
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_10%,rgba(240,212,136,0.16),transparent_30%),radial-gradient(circle_at_85%_20%,rgba(52,211,153,0.10),transparent_28%),linear-gradient(135deg,#07120d_0%,#10251b_48%,#07120d_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_10%,rgba(215,255,0,0.14),transparent_30%),radial-gradient(circle_at_85%_20%,rgba(52,211,153,0.10),transparent_28%),linear-gradient(135deg,#07120d_0%,#10251b_48%,#07120d_100%)]" />
         <div className="absolute inset-0 opacity-[0.08] bg-[linear-gradient(90deg,rgba(255,255,255,0.12)_1px,transparent_1px),linear-gradient(rgba(255,255,255,0.12)_1px,transparent_1px)] bg-[size:72px_72px]" />
 
         <div className="relative mx-auto max-w-7xl px-5 py-5 sm:px-6 lg:px-8">
@@ -109,8 +107,8 @@ export default function Home() {
 
           <div className="grid min-h-[78vh] items-center gap-14 py-14 lg:grid-cols-[0.95fr_1.05fr] lg:py-20">
             <div>
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#f0d488]/25 bg-[#f0d488]/10 px-4 py-2 text-sm font-bold text-[#fff8df]">
-                <MapPin className="h-4 w-4 shrink-0 text-[#f0d488]" />
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#d7ff00]/25 bg-[#d7ff00]/10 px-4 py-2 text-sm font-bold text-[#fff8df]">
+                <MapPin className="h-4 w-4 shrink-0 text-[#d7ff00]" />
                 Southern New Mexico Tree Service
               </div>
 
@@ -127,7 +125,7 @@ export default function Home() {
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#f0d488] px-7 py-4 text-base font-black text-[#07120d] shadow-xl shadow-black/30 transition hover:-translate-y-0.5 hover:bg-[#ffe7a2]"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#d7ff00] px-7 py-4 text-base font-black text-[#07120d] shadow-xl shadow-black/30 transition hover:-translate-y-0.5 hover:bg-[#ecff66]"
                 >
                   Request a Free Quote
                   <ArrowRight className="h-5 w-5" />
@@ -135,7 +133,7 @@ export default function Home() {
 
                 <a
                   href={`tel:${phoneNumber}`}
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-[#f0d488]/20 bg-white/10 px-7 py-4 text-base font-black text-[#fff8df] transition hover:-translate-y-0.5 hover:bg-white/15 hover:text-[#f0d488]"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-[#d7ff00]/20 bg-white/10 px-7 py-4 text-base font-black text-[#fff8df] transition hover:-translate-y-0.5 hover:bg-white/15 hover:text-[#d7ff00]"
                 >
                   <Phone className="h-5 w-5" />
                   Call {phoneNumber}
@@ -144,31 +142,31 @@ export default function Home() {
 
               <div className="mt-10 grid gap-3 text-sm text-stone-200 sm:grid-cols-2">
                 <div className="flex items-start gap-3">
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#f0d488]" />
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#d7ff00]" />
                   <span>Free estimates available</span>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#f0d488]" />
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#d7ff00]" />
                   <span>Residential and commercial tree work</span>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#f0d488]" />
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#d7ff00]" />
                   <span>Removal, pruning, grinding, and cleanup</span>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#f0d488]" />
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#d7ff00]" />
                   <span>Serving key Southern New Mexico communities</span>
                 </div>
               </div>
             </div>
 
             <div className="relative">
-              <div className="absolute -inset-5 rounded-[2.75rem] bg-[#f0d488]/10 blur-3xl" />
+              <div className="absolute -inset-5 rounded-[2.75rem] bg-[#d7ff00]/10 blur-3xl" />
 
-              <div className="relative overflow-hidden rounded-[2.25rem] border border-[#f0d488]/15 bg-[#10251b] shadow-2xl shadow-black/40">
+              <div className="relative overflow-hidden rounded-[2.25rem] border border-[#d7ff00]/15 bg-[#10251b] shadow-2xl shadow-black/40">
                 <div className="relative h-[520px]">
                   <Image
                     src={heroImageSrc}
@@ -181,8 +179,8 @@ export default function Home() {
 
                   <div className="absolute inset-0 bg-gradient-to-t from-[#07120d] via-[#07120d]/20 to-transparent" />
 
-                  <div className="absolute bottom-5 left-5 right-5 rounded-[1.6rem] border border-[#f0d488]/15 bg-[#07120d]/85 p-5 backdrop-blur-xl">
-                    <p className="text-sm font-black uppercase tracking-[0.18em] text-[#f0d488]">
+                  <div className="absolute bottom-5 left-5 right-5 rounded-[1.6rem] border border-[#d7ff00]/15 bg-[#07120d]/85 p-5 backdrop-blur-xl">
+                    <p className="text-sm font-black uppercase tracking-[0.18em] text-[#d7ff00]">
                       Tree Work Done Right
                     </p>
 
@@ -196,7 +194,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="mb-10 border-t border-[#f0d488]/15 pt-6">
+          <div className="mb-10 border-t border-[#d7ff00]/15 pt-6">
             <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
               <span className="text-2xl font-black tracking-tight text-[#fff8df] sm:text-3xl">
                 Serving
@@ -206,7 +204,7 @@ export default function Home() {
                 {serviceAreas.map((area, index) => (
                   <span
                     key={area}
-                    className={`absolute left-0 top-1/2 -translate-y-1/2 whitespace-nowrap text-2xl font-black tracking-tight text-[#f0d488] transition-all duration-700 sm:text-3xl ${
+                    className={`absolute left-0 top-1/2 -translate-y-1/2 whitespace-nowrap text-2xl font-black tracking-tight text-[#d7ff00] transition-all duration-700 sm:text-3xl ${
                       index === activeAreaIndex
                         ? "opacity-100"
                         : "translate-y-2 opacity-0"
@@ -222,16 +220,16 @@ export default function Home() {
       </section>
 
       <section className="relative overflow-hidden bg-[#122016] px-5 py-20 text-white sm:px-6 lg:px-8">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(214,184,106,0.22),transparent_28%),radial-gradient(circle_at_85%_72%,rgba(52,211,153,0.14),transparent_30%),linear-gradient(135deg,#07120d_0%,#183722_50%,#203f29_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(215,255,0,0.18),transparent_28%),radial-gradient(circle_at_85%_72%,rgba(52,211,153,0.14),transparent_30%),linear-gradient(135deg,#07120d_0%,#183722_50%,#203f29_100%)]" />
         <div className="absolute inset-0 opacity-[0.07] bg-[linear-gradient(90deg,rgba(255,255,255,0.16)_1px,transparent_1px),linear-gradient(rgba(255,255,255,0.16)_1px,transparent_1px)] bg-[size:88px_88px]" />
         <div className="absolute left-0 top-0 h-full w-1/3 bg-gradient-to-r from-[#07120d]/80 to-transparent" />
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#d6b86a]/70 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#f0d488]/35 to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#d7ff00]/60 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#d7ff00]/35 to-transparent" />
 
         <div className="relative mx-auto max-w-7xl">
           <div className="grid gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
             <div className="lg:sticky lg:top-24">
-              <p className="text-sm font-black uppercase tracking-[0.22em] text-[#f0d488]">
+              <p className="text-sm font-black uppercase tracking-[0.22em] text-[#d7ff00]">
                 What They Handle
               </p>
 
@@ -246,7 +244,7 @@ export default function Home() {
 
               <Link
                 href="/services"
-                className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-[#f0d488] px-6 py-3 text-sm font-black uppercase tracking-[0.14em] text-[#07120d] shadow-xl shadow-black/20 transition hover:-translate-y-0.5 hover:bg-[#ffe7a2]"
+                className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-[#d7ff00] px-6 py-3 text-sm font-black uppercase tracking-[0.14em] text-[#07120d] shadow-xl shadow-black/20 transition hover:-translate-y-0.5 hover:bg-[#ecff66]"
               >
                 View services
                 <ArrowRight className="h-4 w-4" />
@@ -254,23 +252,23 @@ export default function Home() {
             </div>
 
             <div className="relative">
-              <div className="absolute -left-5 top-0 hidden h-full w-px bg-gradient-to-b from-transparent via-[#f0d488]/35 to-transparent lg:block" />
+              <div className="absolute -left-5 top-0 hidden h-full w-px bg-gradient-to-b from-transparent via-[#d7ff00]/35 to-transparent lg:block" />
 
               <div>
                 {services.map((service, index) => (
                   <Link
                     key={service.title}
                     href="/services"
-                    className="group grid gap-4 border-b border-white/12 py-6 transition first:border-t hover:border-[#f0d488]/40 sm:grid-cols-[72px_1fr]"
+                    className="group grid gap-4 border-b border-white/12 py-6 transition first:border-t hover:border-[#d7ff00]/40 sm:grid-cols-[72px_1fr]"
                   >
                     <div>
-                      <p className="font-serif text-4xl font-black leading-none text-white/12 transition group-hover:text-[#f0d488] sm:text-5xl">
+                      <p className="font-serif text-4xl font-black leading-none text-white/12 transition group-hover:text-[#d7ff00] sm:text-5xl">
                         {String(index + 1).padStart(2, "0")}
                       </p>
                     </div>
 
                     <div className="grid gap-3 xl:grid-cols-[230px_1fr_auto] xl:items-start">
-                      <h3 className="text-xl font-black tracking-tight text-white transition group-hover:text-[#f0d488] sm:text-2xl">
+                      <h3 className="text-xl font-black tracking-tight text-white transition group-hover:text-[#d7ff00] sm:text-2xl">
                         {service.title}
                       </h3>
 
@@ -278,7 +276,7 @@ export default function Home() {
                         {service.description}
                       </p>
 
-                      <div className="hidden h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition group-hover:-translate-y-0.5 group-hover:border-[#f0d488]/40 group-hover:bg-[#f0d488] group-hover:text-[#07120d] xl:flex">
+                      <div className="hidden h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition group-hover:-translate-y-0.5 group-hover:border-[#d7ff00]/40 group-hover:bg-[#d7ff00] group-hover:text-[#07120d] xl:flex">
                         <ArrowRight className="h-4 w-4" />
                       </div>
                     </div>
@@ -286,8 +284,8 @@ export default function Home() {
                 ))}
               </div>
 
-              <div className="mt-8 border-l border-[#f0d488]/40 pl-5">
-                <p className="text-sm font-black uppercase tracking-[0.18em] text-[#f0d488]">
+              <div className="mt-8 border-l border-[#d7ff00]/40 pl-5">
+                <p className="text-sm font-black uppercase tracking-[0.18em] text-[#d7ff00]">
                   Simple next step
                 </p>
 
@@ -303,12 +301,12 @@ export default function Home() {
       </section>
 
       <section className="relative overflow-hidden bg-[#10251b] px-5 py-24 text-white sm:px-6 lg:px-8">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(240,212,136,0.18),transparent_28%),radial-gradient(circle_at_80%_80%,rgba(52,211,153,0.10),transparent_30%),linear-gradient(135deg,#10251b_0%,#1f3d2a_45%,#07120d_100%)]" />
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#f0d488]/45 to-transparent" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(215,255,0,0.14),transparent_28%),radial-gradient(circle_at_80%_80%,rgba(52,211,153,0.10),transparent_30%),linear-gradient(135deg,#10251b_0%,#1f3d2a_45%,#07120d_100%)]" />
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#d7ff00]/45 to-transparent" />
 
         <div className="relative mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-center">
           <div>
-            <p className="text-sm font-black uppercase tracking-[0.22em] text-[#f0d488]">
+            <p className="text-sm font-black uppercase tracking-[0.22em] text-[#d7ff00]">
               Simple Process
             </p>
 
@@ -322,8 +320,8 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="relative min-h-[310px] overflow-hidden rounded-[2rem] border border-[#f0d488]/18 bg-[#07120d]/60 p-7 shadow-2xl shadow-black/25 backdrop-blur-xl sm:p-9">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(240,212,136,0.13),transparent_34%)]" />
+          <div className="relative min-h-[310px] overflow-hidden rounded-[2rem] border border-[#d7ff00]/18 bg-[#07120d]/60 p-7 shadow-2xl shadow-black/25 backdrop-blur-xl sm:p-9">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(215,255,0,0.11),transparent_34%)]" />
 
             <div className="relative">
               <div className="mb-8 flex items-center gap-3">
@@ -335,7 +333,7 @@ export default function Home() {
                       <div
                         className={`flex h-10 w-10 items-center justify-center rounded-full border text-sm font-black transition duration-500 ${
                           isComplete
-                            ? "border-[#f0d488] bg-[#f0d488] text-[#07120d]"
+                            ? "border-[#d7ff00] bg-[#d7ff00] text-[#07120d]"
                             : "border-white/15 bg-white/5 text-stone-400"
                         }`}
                       >
@@ -350,7 +348,7 @@ export default function Home() {
                         <div
                           className={`hidden h-px w-12 transition duration-500 sm:block ${
                             index < activeProcessIndex
-                              ? "bg-[#f0d488]"
+                              ? "bg-[#d7ff00]"
                               : "bg-white/15"
                           }`}
                         />
@@ -360,8 +358,11 @@ export default function Home() {
                 })}
               </div>
 
-              <div key={activeProcessStep.title} className="animate-[fadeIn_500ms_ease-in-out]">
-                <p className="text-sm font-black uppercase tracking-[0.18em] text-[#f0d488]">
+              <div
+                key={activeProcessStep.title}
+                className="animate-[fadeIn_500ms_ease-in-out]"
+              >
+                <p className="text-sm font-black uppercase tracking-[0.18em] text-[#d7ff00]">
                   Step {activeProcessIndex + 1}
                 </p>
 
@@ -376,7 +377,7 @@ export default function Home() {
 
               <div className="mt-9 border-t border-white/10 pt-6">
                 <div className="flex items-start gap-3">
-                  <ShieldCheck className="mt-1 h-6 w-6 shrink-0 text-[#f0d488]" />
+                  <ShieldCheck className="mt-1 h-6 w-6 shrink-0 text-[#d7ff00]" />
                   <p className="leading-7 text-stone-300">
                     Each step keeps the customer moving toward the same result:
                     safe tree work, clear communication, and a cleaner property.
