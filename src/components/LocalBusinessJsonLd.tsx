@@ -1,46 +1,110 @@
 import { siteConfig } from "@/lib/site";
 
+type SchemaServiceArea = {
+  type: string;
+  name: string;
+  region: string;
+  country: string;
+};
+
+function getAbsoluteUrl(path: string) {
+  if (path.startsWith("http")) {
+    return path;
+  }
+
+  return `${siteConfig.url}${path}`;
+}
+
+function getAreaServed(area: SchemaServiceArea) {
+  return {
+    "@type": area.type,
+    name: area.name,
+    address: {
+      "@type": "PostalAddress",
+      addressRegion: area.region,
+      addressCountry: area.country,
+    },
+  };
+}
+
 export default function LocalBusinessJsonLd() {
+  const areaServed = siteConfig.schemaServiceAreas.map(getAreaServed);
+
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
     "@id": `${siteConfig.url}/#localbusiness`,
+
     name: siteConfig.name,
     alternateName: siteConfig.shortName,
     url: siteConfig.url,
-    telephone: siteConfig.phone,
+    telephone: siteConfig.phoneE164,
     email: siteConfig.email,
-    image: `${siteConfig.url}${siteConfig.heroImage}`,
-    logo: `${siteConfig.url}${siteConfig.logo}`,
+
+    image: getAbsoluteUrl(siteConfig.heroImage),
+    logo: getAbsoluteUrl(siteConfig.logo),
+
     description: siteConfig.description,
     priceRange: "$$",
-    areaServed: siteConfig.serviceAreas.map((area) => ({
-      "@type": "City",
-      name: area,
-    })),
+
+    areaServed,
+
+    address: {
+      "@type": "PostalAddress",
+      addressRegion: "NM",
+      addressCountry: "US",
+    },
+
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        telephone: siteConfig.phoneE164,
+        contactType: "customer service",
+        areaServed: "US-NM",
+        availableLanguage: ["English"],
+        email: siteConfig.email,
+      },
+    ],
+
     knowsAbout: siteConfig.services,
-    makesOffer: siteConfig.services.map((service) => ({
+
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Tree Services",
+      itemListElement: siteConfig.servicePages.map((service) => ({
+        "@type": "Offer",
+        url: getAbsoluteUrl(service.url),
+        itemOffered: {
+          "@type": "Service",
+          name: service.name,
+          serviceType: service.name,
+          provider: {
+            "@id": `${siteConfig.url}/#localbusiness`,
+          },
+          areaServed,
+        },
+      })),
+    },
+
+    makesOffer: siteConfig.servicePages.map((service) => ({
       "@type": "Offer",
+      url: getAbsoluteUrl(service.url),
       itemOffered: {
         "@type": "Service",
-        name: service,
-        serviceType: service,
+        name: service.name,
+        serviceType: service.name,
         provider: {
           "@id": `${siteConfig.url}/#localbusiness`,
         },
-        areaServed: siteConfig.serviceAreas.map((area) => ({
-          "@type": "City",
-          name: area,
-        })),
+        areaServed,
       },
     })),
-    contactPoint: {
-      "@type": "ContactPoint",
-      telephone: siteConfig.phone,
-      contactType: "customer service",
-      areaServed: "US-NM",
-      availableLanguage: "English",
-    },
+
+    ...(siteConfig.sameAs.length > 0
+      ? {
+          sameAs: siteConfig.sameAs,
+        }
+      : {}),
   };
 
   return (

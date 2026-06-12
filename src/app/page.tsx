@@ -14,6 +14,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 
 const phoneNumber = "(505) 372-9043";
+const phoneHref = "tel:5053729043";
 const heroImageSrc = "/images/hero/tree-service-hero.png";
 
 const serviceAreas = [
@@ -21,34 +22,34 @@ const serviceAreas = [
   "Ruidoso",
   "Roswell",
   "Alamogordo",
-  "Surrounding Areas",
+  "Nearby Areas",
 ];
 
 const services = [
   {
     title: "Tree removal",
     description:
-      "For dead, leaning, storm-damaged, crowded, or unwanted trees that need to be removed with care around the property.",
+      "Safe removal for dead, leaning, storm-damaged, crowded, or unwanted trees near homes, fences, driveways, and other property features.",
   },
   {
     title: "Tree trimming and pruning",
     description:
-      "For overgrown branches, roof clearance, walkways, fences, and routine property maintenance.",
+      "Professional trimming and pruning for overgrown branches, roof clearance, walkways, fence lines, visibility, and routine property maintenance.",
   },
   {
     title: "Stump grinding",
     description:
-      "For old or freshly cut stumps that make the yard harder to use, mow, clean up, or landscape.",
+      "Stump grinding for old or freshly cut stumps that make a yard harder to mow, clean up, landscape, or use safely.",
   },
   {
     title: "Storm damage cleanup",
     description:
-      "For fallen limbs, broken branches, blocked access, and tree debris after rough New Mexico weather.",
+      "Cleanup for fallen limbs, broken branches, blocked access, and tree debris after wind, storms, and rough New Mexico weather.",
   },
   {
     title: "Tree assessments",
     description:
-      "For trees that look questionable, unsafe, weak, dead, leaning, or difficult to evaluate without a walkthrough.",
+      "Practical guidance for trees that look dead, weak, leaning, hazardous, or difficult to evaluate without a closer look.",
   },
 ];
 
@@ -56,17 +57,17 @@ const processSteps = [
   {
     title: "Send the details",
     description:
-      "Share the service needed, property location, and whether the tree concern is urgent.",
+      "Share the service needed, property location, photos if available, and whether the tree concern feels urgent.",
   },
   {
     title: "Get clear direction",
     description:
-      "High Point reviews the situation and helps determine the right next step.",
+      "High Point reviews the situation and helps determine the right next step for the property, timeline, and safety concern.",
   },
   {
     title: "Get the work handled",
     description:
-      "The crew focuses on safe work, property protection, and a clean finished result.",
+      "The crew focuses on safe tree work, property protection, practical cleanup, and a finished result that is easier to maintain.",
   },
 ];
 
@@ -113,13 +114,15 @@ export default function Home() {
               </div>
 
               <h1 className="max-w-4xl font-serif text-5xl font-black tracking-tight text-[#fff8df] sm:text-6xl lg:text-7xl">
-                Professional tree work for safer, cleaner properties.
+                Professional tree service for safer, cleaner properties in
+                Southern New Mexico.
               </h1>
 
               <p className="mt-6 max-w-2xl text-lg leading-8 text-stone-200 sm:text-xl">
-                High Point Tree Service LLC helps property owners with tree
-                removal, pruning, stump grinding, storm cleanup, and practical
-                tree assessments across Southern New Mexico.
+                High Point Tree Service LLC provides tree removal, trimming,
+                pruning, stump grinding, storm damage cleanup, and tree
+                assessments for residential and commercial properties across
+                Southern New Mexico.
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -132,7 +135,7 @@ export default function Home() {
                 </Link>
 
                 <a
-                  href={`tel:${phoneNumber}`}
+                  href={phoneHref}
                   className="inline-flex items-center justify-center gap-2 rounded-full border border-[#d7ff00]/20 bg-white/10 px-7 py-4 text-base font-black text-[#fff8df] transition hover:-translate-y-0.5 hover:bg-white/15 hover:text-[#d7ff00]"
                 >
                   <Phone className="h-5 w-5" />
@@ -153,12 +156,15 @@ export default function Home() {
 
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#d7ff00]" />
-                  <span>Removal, pruning, grinding, and cleanup</span>
+                  <span>Removal, trimming, grinding, and cleanup</span>
                 </div>
 
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#d7ff00]" />
-                  <span>Serving key Southern New Mexico communities</span>
+                  <span>
+                    Serving Las Cruces, Ruidoso, Roswell, Alamogordo, and
+                    nearby areas
+                  </span>
                 </div>
               </div>
             </div>
@@ -170,7 +176,7 @@ export default function Home() {
                 <div className="relative h-[520px]">
                   <Image
                     src={heroImageSrc}
-                    alt="Professional tree service work"
+                    alt="Tree service crew completing professional tree work in Southern New Mexico"
                     fill
                     priority
                     sizes="(max-width: 1024px) 100vw, 50vw"
@@ -185,8 +191,8 @@ export default function Home() {
                     </p>
 
                     <p className="mt-2 text-sm leading-6 text-stone-300">
-                      Built around safety, property protection, and clean
-                      finished results.
+                      Built around safety, property protection, clear
+                      communication, and clean finished results.
                     </p>
                   </div>
                 </div>
@@ -230,23 +236,25 @@ export default function Home() {
           <div className="grid gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
             <div className="lg:sticky lg:top-24">
               <p className="text-sm font-black uppercase tracking-[0.22em] text-[#d7ff00]">
-                What They Handle
+                Tree Services
               </p>
 
               <h2 className="mt-4 max-w-xl font-serif text-4xl font-black leading-tight tracking-tight text-[#fff8df] sm:text-5xl">
-                Tree work that solves real property problems.
+                Tree services built around safety, access, cleanup, and property
+                protection.
               </h2>
 
               <p className="mt-6 max-w-xl text-base leading-8 text-stone-200 sm:text-lg">
-                The homepage should make the main services easy to understand
-                without turning the page into a long service catalog.
+                From hazardous removals to routine pruning and storm cleanup,
+                High Point Tree Service helps property owners choose the right
+                service and get the work handled safely.
               </p>
 
               <Link
                 href="/services"
                 className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-[#d7ff00] px-6 py-3 text-sm font-black uppercase tracking-[0.14em] text-[#07120d] shadow-xl shadow-black/20 transition hover:-translate-y-0.5 hover:bg-[#ecff66]"
               >
-                View services
+                View Services
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
@@ -286,13 +294,13 @@ export default function Home() {
 
               <div className="mt-8 border-l border-[#d7ff00]/40 pl-5">
                 <p className="text-sm font-black uppercase tracking-[0.18em] text-[#d7ff00]">
-                  Simple next step
+                  Not sure what service you need?
                 </p>
 
                 <p className="mt-3 max-w-3xl text-base leading-8 text-stone-200">
-                  If the customer is not sure which service they need, they can
-                  send the property details and High Point can help determine
-                  the right next step.
+                  Send the property details, photos if available, and the main
+                  concern. High Point can review the situation and recommend the
+                  right next step.
                 </p>
               </div>
             </div>
@@ -311,12 +319,13 @@ export default function Home() {
             </p>
 
             <h2 className="mt-3 max-w-xl font-serif text-4xl font-black tracking-tight text-[#fff8df] sm:text-5xl">
-              From first contact to a cleaner property.
+              From first contact to a safer, cleaner property.
             </h2>
 
             <p className="mt-5 max-w-xl text-lg leading-8 text-stone-300">
-              The process stays simple so customers know what happens next
-              without reading through a long list of steps.
+              Getting tree work handled should not feel confusing. High Point
+              keeps the next step clear, whether the job involves a hazardous
+              tree, routine trimming, stump grinding, or storm cleanup.
             </p>
           </div>
 
@@ -380,7 +389,8 @@ export default function Home() {
                   <ShieldCheck className="mt-1 h-6 w-6 shrink-0 text-[#d7ff00]" />
                   <p className="leading-7 text-stone-300">
                     Each step keeps the customer moving toward the same result:
-                    safe tree work, clear communication, and a cleaner property.
+                    safe tree work, clear communication, property protection,
+                    and a cleaner finished space.
                   </p>
                 </div>
               </div>

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -13,31 +14,40 @@ import SiteFooter from "@/components/SiteFooter";
 import ContactForm from "@/components/ContactForm";
 
 const phoneNumber = "(505) 372-9043";
-const phoneHref = "5053729043";
-const smsNumber = "5053729043";
+const phoneHref = "tel:+15053729043";
+const smsHref = "sms:+15053729043";
 const emailAddress = "info@highpointtreeservicenm.com";
 
-const serviceAreas = ["Las Cruces", "Ruidoso", "Roswell", "Alamogordo"];
+const serviceAreas = [
+  "Las Cruces",
+  "Ruidoso",
+  "Roswell",
+  "Alamogordo",
+  "Nearby Areas",
+];
 
 const contactMethods = [
   {
     label: "Call",
     title: phoneNumber,
-    description: "Best for urgent tree concerns, storm cleanup, or fast answers.",
-    href: `tel:${phoneHref}`,
+    description:
+      "Best for urgent tree concerns, storm damage, blocked access, or fast answers.",
+    href: phoneHref,
     icon: Phone,
   },
   {
     label: "Text",
     title: "Send photos by text",
-    description: "Helpful for tree damage, access issues, stumps, and cleanup needs.",
-    href: `sms:${smsNumber}`,
+    description:
+      "Helpful for tree damage, access issues, stumps, cleanup needs, and quick property details.",
+    href: smsHref,
     icon: MessageSquare,
   },
   {
     label: "Email",
     title: emailAddress,
-    description: "Good for non-urgent project details or follow-up information.",
+    description:
+      "Good for non-urgent project details, quote follow-ups, and additional information.",
     href: `mailto:${emailAddress}`,
     icon: Mail,
   },
@@ -50,10 +60,20 @@ const quoteDetails = [
   "Photos if available",
 ];
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Contact High Point Tree Service LLC | Free Tree Service Quote",
   description:
-    "Contact High Point Tree Service LLC for tree removal, trimming, pruning, stump grinding, storm cleanup, and tree assessments in Las Cruces, Ruidoso, Roswell, Alamogordo, and surrounding areas.",
+    "Contact High Point Tree Service LLC for tree removal, trimming, pruning, stump grinding, storm damage cleanup, tree assessments, and property cleanup in Las Cruces, Ruidoso, Roswell, Alamogordo, and nearby areas.",
+  alternates: {
+    canonical: "/contact",
+  },
+  openGraph: {
+    title: "Contact High Point Tree Service LLC",
+    description:
+      "Request a free quote for tree removal, trimming, pruning, stump grinding, storm damage cleanup, tree assessments, and property cleanup across Southern New Mexico.",
+    url: "/contact",
+    type: "website",
+  },
 };
 
 export default function ContactPage() {
@@ -77,13 +97,13 @@ export default function ContactPage() {
             </p>
 
             <h1 className="mt-5 max-w-4xl font-serif text-5xl font-black tracking-tight text-[#fff8df] sm:text-6xl lg:text-7xl">
-              Get a clear quote for tree work.
+              Request a clear quote for tree work.
             </h1>
 
             <p className="mt-6 max-w-2xl text-lg leading-8 text-[#fff8df]/78">
               Tell High Point Tree Service what is happening on the property.
-              They can review the details, confirm the service area, and follow
-              up with the next step.
+              They can review the location, service need, urgency, and any
+              photos you provide to help determine the right next step.
             </p>
           </div>
 
@@ -110,9 +130,11 @@ export default function ContactPage() {
                       <p className="text-xs font-black uppercase tracking-[0.2em] text-[#f0d488]/80">
                         {method.label}
                       </p>
+
                       <p className="mt-1 text-xl font-black text-[#fff8df]">
                         {method.title}
                       </p>
+
                       <p className="mt-2 text-sm leading-6 text-[#fff8df]/62">
                         {method.description}
                       </p>
@@ -139,9 +161,9 @@ export default function ContactPage() {
             </h2>
 
             <p className="mt-5 text-lg leading-8 text-[#fff8df]/72">
-              The more useful the details are, the easier it is for the crew to
-              understand the job, confirm availability, and respond with the
-              right next step.
+              The more useful the details are, the easier it is to understand
+              the job, confirm availability, and follow up with the right next
+              step.
             </p>
 
             <div className="mt-10 border-y border-[#f0d488]/18 py-7">
@@ -167,6 +189,7 @@ export default function ContactPage() {
                   <p className="font-black text-[#fff8df]">
                     For urgent tree concerns
                   </p>
+
                   <p className="mt-2 text-sm leading-6 text-[#fff8df]/64">
                     Calling or texting is usually faster for storm damage,
                     hazardous limbs, blocked access, or immediate safety
@@ -181,7 +204,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="bg-[#0b1710] px-5 py-18 sm:px-6 lg:px-8">
+      <section className="bg-[#0b1710] px-5 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-10 border-t border-[#f0d488]/12 pt-14 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
           <div>
             <p className="text-sm font-black uppercase tracking-[0.28em] text-[#f0d488]">
@@ -189,7 +212,8 @@ export default function ContactPage() {
             </p>
 
             <h2 className="mt-4 font-serif text-4xl font-black tracking-tight text-[#fff8df] sm:text-5xl">
-              Serving key Southern New Mexico communities.
+              Serving Las Cruces, Ruidoso, Roswell, Alamogordo, and nearby
+              areas.
             </h2>
           </div>
 
@@ -198,15 +222,12 @@ export default function ContactPage() {
               {serviceAreas.map((area) => (
                 <span
                   key={area}
-                  className="rounded-full border border-[#f0d488]/18 bg-[#fff8df]/7 px-5 py-3 text-sm font-black text-[#fff8df]"
+                  className="inline-flex items-center gap-2 rounded-full border border-[#f0d488]/18 bg-[#fff8df]/[0.07] px-5 py-3 text-sm font-black text-[#fff8df]"
                 >
+                  <MapPin className="h-4 w-4 text-[#f0d488]" />
                   {area}
                 </span>
               ))}
-
-              <span className="rounded-full border border-[#f0d488]/30 bg-[#f0d488] px-5 py-3 text-sm font-black text-[#07120d]">
-                Surrounding Areas
-              </span>
             </div>
 
             <p className="mt-6 max-w-3xl text-sm leading-7 text-[#fff8df]/62">
@@ -219,7 +240,7 @@ export default function ContactPage() {
               href="/services"
               className="mt-7 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.18em] text-[#f0d488] transition hover:text-[#fff8df]"
             >
-              View services
+              View Services
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>

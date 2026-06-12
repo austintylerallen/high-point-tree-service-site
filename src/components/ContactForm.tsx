@@ -1,42 +1,57 @@
 "use client";
 
-import { useState } from "react";
-import { ArrowRight, CheckCircle2, ShieldCheck } from "lucide-react";
+import { FormEvent, useState } from "react";
+import { AlertCircle, ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
+type FormDataState = {
+  name: string;
+  phone: string;
+  email: string;
+  service: string;
+  location: string;
+  message: string;
+  company: string;
+};
+
+const initialFormData: FormDataState = {
+  name: "",
+  phone: "",
+  email: "",
+  service: "",
+  location: "",
+  message: "",
+  company: "",
+};
+
+const serviceOptions = [
+  "Tree removal",
+  "Tree trimming and pruning",
+  "Stump grinding",
+  "Storm damage cleanup",
+  "Tree assessment",
+  "Property cleanup",
+  "Not sure yet",
+];
+
 export default function ContactForm() {
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    service: "Tree removal",
-    location: "",
-    message: "",
-  });
+  const [formData, setFormData] = useState<FormDataState>(initialFormData);
+  const [status, setStatus] = useState<FormStatus>("idle");
+  const [responseMessage, setResponseMessage] = useState("");
 
-  const [formStatus, setFormStatus] = useState<FormStatus>("idle");
-  const [statusMessage, setStatusMessage] = useState("");
-
-  const handleChange = (
-    event:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
-      | React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    const { name, value } = event.target;
-
-    setFormData((currentData) => ({
-      ...currentData,
-      [name]: value,
+  function updateField(field: keyof FormDataState, value: string) {
+    setFormData((current) => ({
+      ...current,
+      [field]: value,
     }));
-  };
+  }
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    setFormStatus("loading");
-    setStatusMessage("");
+    setStatus("loading");
+    setResponseMessage("");
 
     try {
       const response = await fetch("/api/quote", {
@@ -47,221 +62,225 @@ export default function ContactForm() {
         body: JSON.stringify(formData),
       });
 
-      const result = await response.json();
+      const result = (await response.json()) as {
+        success?: boolean;
+        message?: string;
+      };
 
-      if (!response.ok) {
-        setFormStatus("error");
-        setStatusMessage(
+      if (!response.ok || !result.success) {
+        setStatus("error");
+        setResponseMessage(
           result.message || "Something went wrong. Please try again."
         );
         return;
       }
 
-      setFormStatus("success");
-      setStatusMessage(
-        "Your quote request was sent successfully. High Point Tree Service will follow up soon."
+      setStatus("success");
+      setResponseMessage(
+        result.message ||
+          "Your quote request was sent successfully. High Point Tree Service will follow up soon."
       );
-
-      setFormData({
-        name: "",
-        phone: "",
-        email: "",
-        service: "Tree removal",
-        location: "",
-        message: "",
-      });
+      setFormData(initialFormData);
     } catch (error) {
-      console.error("Quote form error:", error);
-      setFormStatus("error");
-      setStatusMessage(
-        "Something went wrong. Please call or text High Point Tree Service directly."
-      );
+      console.error("Contact form error:", error);
+      setStatus("error");
+      setResponseMessage("Something went wrong. Please try again.");
     }
-  };
+  }
 
-  const labelClassName =
-    "mb-2 block text-sm font-black text-[#fff8df]";
-
-  const inputClassName =
-    "w-full rounded-2xl border border-[#f0d488]/20 bg-[#fff8df] px-4 py-3.5 text-[#07120d] outline-none transition placeholder:text-[#657064] focus:border-[#f0d488] focus:ring-4 focus:ring-[#f0d488]/20";
+  const isLoading = status === "loading";
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="relative overflow-hidden rounded-[2.4rem] border border-[#f0d488]/18 bg-[#07120d]/88 p-6 text-[#fff8df] shadow-2xl shadow-black/35 backdrop-blur-xl sm:p-8 lg:p-10"
+      className="rounded-[2rem] border border-[#f0d488]/18 bg-[#07120d]/72 p-6 shadow-2xl shadow-black/30 backdrop-blur-xl sm:p-8"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_0%,rgba(240,212,136,0.18),transparent_34%),radial-gradient(circle_at_100%_100%,rgba(32,63,41,0.85),transparent_36%)]" />
-      <div className="absolute inset-x-0 top-0 h-1 bg-[linear-gradient(90deg,#f0d488,#fff8df,#f0d488)]" />
+      <div className="grid gap-6">
+        <input
+          type="text"
+          name="company"
+          value={formData.company}
+          onChange={(event) => updateField("company", event.target.value)}
+          className="hidden"
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+        />
 
-      <div className="relative">
-        <div className="mb-8 grid gap-6 border-b border-[#f0d488]/14 pb-8 lg:grid-cols-[1fr_auto] lg:items-start">
-          <div>
-            <p className="text-sm font-black uppercase tracking-[0.22em] text-[#f0d488]">
-              Estimate Form
-            </p>
-
-            <h2 className="mt-3 font-serif text-3xl font-black tracking-tight text-[#fff8df] sm:text-4xl">
-              Tell us what needs to be handled.
-            </h2>
-
-            <p className="mt-3 max-w-2xl leading-7 text-[#fff8df]/68">
-              This does not need to be perfect. A clear description and location
-              are enough to start the quote process.
-            </p>
-          </div>
-
-          <div className="hidden rounded-full border border-[#f0d488]/18 bg-[#f0d488]/10 px-4 py-2 text-sm font-black text-[#f0d488] lg:block">
-            Free Estimate
-          </div>
+        <div>
+          <label
+            htmlFor="name"
+            className="text-sm font-black uppercase tracking-[0.18em] text-[#f0d488]"
+          >
+            Name *
+          </label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            required
+            value={formData.name}
+            onChange={(event) => updateField("name", event.target.value)}
+            autoComplete="name"
+            placeholder="Your name"
+            className="mt-3 w-full rounded-2xl border border-[#f0d488]/18 bg-[#fff8df]/[0.07] px-5 py-4 text-[#fff8df] outline-none transition placeholder:text-[#fff8df]/40 focus:border-[#f0d488] focus:bg-[#fff8df]/[0.1]"
+          />
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2">
+        <div className="grid gap-6 sm:grid-cols-2">
           <div>
-            <label htmlFor="name" className={labelClassName}>
-              Full Name
+            <label
+              htmlFor="phone"
+              className="text-sm font-black uppercase tracking-[0.18em] text-[#f0d488]"
+            >
+              Phone *
             </label>
-
-            <input
-              id="name"
-              name="name"
-              type="text"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              placeholder="Your name"
-              className={inputClassName}
-            />
-          </div>
-
-          <div>
-            <label htmlFor="phone" className={labelClassName}>
-              Phone Number
-            </label>
-
             <input
               id="phone"
               name="phone"
               type="tel"
-              value={formData.phone}
-              onChange={handleChange}
               required
-              placeholder="Best number"
-              className={inputClassName}
+              value={formData.phone}
+              onChange={(event) => updateField("phone", event.target.value)}
+              autoComplete="tel"
+              placeholder="Best phone number"
+              className="mt-3 w-full rounded-2xl border border-[#f0d488]/18 bg-[#fff8df]/[0.07] px-5 py-4 text-[#fff8df] outline-none transition placeholder:text-[#fff8df]/40 focus:border-[#f0d488] focus:bg-[#fff8df]/[0.1]"
             />
           </div>
 
           <div>
-            <label htmlFor="email" className={labelClassName}>
+            <label
+              htmlFor="email"
+              className="text-sm font-black uppercase tracking-[0.18em] text-[#f0d488]"
+            >
               Email
             </label>
-
             <input
               id="email"
               name="email"
               type="email"
               value={formData.email}
-              onChange={handleChange}
-              placeholder="you@example.com"
-              className={inputClassName}
+              onChange={(event) => updateField("email", event.target.value)}
+              autoComplete="email"
+              placeholder="Email address"
+              className="mt-3 w-full rounded-2xl border border-[#f0d488]/18 bg-[#fff8df]/[0.07] px-5 py-4 text-[#fff8df] outline-none transition placeholder:text-[#fff8df]/40 focus:border-[#f0d488] focus:bg-[#fff8df]/[0.1]"
             />
           </div>
+        </div>
 
+        <div className="grid gap-6 sm:grid-cols-2">
           <div>
-            <label htmlFor="service" className={labelClassName}>
-              Service Needed
+            <label
+              htmlFor="service"
+              className="text-sm font-black uppercase tracking-[0.18em] text-[#f0d488]"
+            >
+              Service Needed *
             </label>
-
             <select
               id="service"
               name="service"
-              value={formData.service}
-              onChange={handleChange}
               required
-              className={inputClassName}
+              value={formData.service}
+              onChange={(event) => updateField("service", event.target.value)}
+              className="mt-3 w-full rounded-2xl border border-[#f0d488]/18 bg-[#10251b] px-5 py-4 text-[#fff8df] outline-none transition focus:border-[#f0d488]"
             >
-              <option>Tree removal</option>
-              <option>Tree trimming / pruning</option>
-              <option>Stump grinding</option>
-              <option>Storm damage cleanup</option>
-              <option>Tree assessment</option>
-              <option>Property cleanup</option>
-              <option>Not sure yet</option>
+              <option value="">Select a service</option>
+              {serviceOptions.map((service) => (
+                <option key={service} value={service}>
+                  {service}
+                </option>
+              ))}
             </select>
           </div>
 
-          <div className="sm:col-span-2">
-            <label htmlFor="location" className={labelClassName}>
-              Property Location
+          <div>
+            <label
+              htmlFor="location"
+              className="text-sm font-black uppercase tracking-[0.18em] text-[#f0d488]"
+            >
+              Property Location *
             </label>
-
             <input
               id="location"
               name="location"
               type="text"
+              required
               value={formData.location}
-              onChange={handleChange}
-              required
-              placeholder="City, neighborhood, or address"
-              className={inputClassName}
-            />
-          </div>
-
-          <div className="sm:col-span-2">
-            <label htmlFor="message" className={labelClassName}>
-              Job Details
-            </label>
-
-            <textarea
-              id="message"
-              name="message"
-              rows={7}
-              value={formData.message}
-              onChange={handleChange}
-              required
-              placeholder="Example: Large dead tree near the driveway, branches over the roof, stump in the front yard, storm damage, cleanup needed, etc."
-              className={`${inputClassName} resize-none`}
+              onChange={(event) => updateField("location", event.target.value)}
+              autoComplete="street-address"
+              placeholder="City, area, or address"
+              className="mt-3 w-full rounded-2xl border border-[#f0d488]/18 bg-[#fff8df]/[0.07] px-5 py-4 text-[#fff8df] outline-none transition placeholder:text-[#fff8df]/40 focus:border-[#f0d488] focus:bg-[#fff8df]/[0.1]"
             />
           </div>
         </div>
 
-        <button
-          type="submit"
-          disabled={formStatus === "loading"}
-          className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-[#f0d488] px-6 py-4 text-base font-black text-[#07120d] shadow-xl shadow-black/25 transition hover:-translate-y-0.5 hover:bg-[#fff8df] disabled:cursor-not-allowed disabled:bg-stone-500 disabled:text-stone-300"
-        >
-          {formStatus === "loading"
-            ? "Sending Request..."
-            : "Submit Quote Request"}
-          <ArrowRight className="h-5 w-5" />
-        </button>
+        <div>
+          <label
+            htmlFor="message"
+            className="text-sm font-black uppercase tracking-[0.18em] text-[#f0d488]"
+          >
+            Job Details *
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            required
+            value={formData.message}
+            onChange={(event) => updateField("message", event.target.value)}
+            rows={6}
+            placeholder="Describe the tree, stump, storm damage, cleanup need, safety concern, or anything else High Point should know."
+            className="mt-3 w-full resize-none rounded-2xl border border-[#f0d488]/18 bg-[#fff8df]/[0.07] px-5 py-4 text-[#fff8df] outline-none transition placeholder:text-[#fff8df]/40 focus:border-[#f0d488] focus:bg-[#fff8df]/[0.1]"
+          />
+        </div>
 
-        {statusMessage && (
+        <div className="rounded-2xl border border-[#f0d488]/14 bg-[#fff8df]/[0.05] p-5">
+          <div className="flex items-start gap-3">
+            <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#f0d488]" />
+            <p className="text-sm leading-6 text-[#fff8df]/70">
+              Photos can help with tree damage, stumps, access issues, and
+              cleanup needs. After submitting the form, you can also text photos
+              to High Point if needed.
+            </p>
+          </div>
+        </div>
+
+        {responseMessage && (
           <div
-            className={`mt-5 rounded-2xl border px-4 py-4 text-sm font-semibold ${
-              formStatus === "success"
-                ? "border-[#f0d488]/25 bg-[#f0d488]/14 text-[#fff8df]"
-                : "border-red-300/25 bg-red-500/15 text-red-100"
+            className={`rounded-2xl border p-5 ${
+              status === "success"
+                ? "border-[#d7ff00]/25 bg-[#d7ff00]/10 text-[#fff8df]"
+                : "border-red-400/30 bg-red-500/10 text-red-100"
             }`}
           >
-            <div className="flex gap-3">
-              {formStatus === "success" && (
-                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#f0d488]" />
+            <div className="flex items-start gap-3">
+              {status === "success" ? (
+                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#d7ff00]" />
+              ) : (
+                <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-red-300" />
               )}
-              <span>{statusMessage}</span>
+
+              <p className="text-sm leading-6">{responseMessage}</p>
             </div>
           </div>
         )}
 
-        <div className="mt-6 rounded-2xl border border-[#f0d488]/16 bg-[#fff8df]/7 p-4">
-          <div className="flex gap-3">
-            <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-[#f0d488]" />
-            <p className="text-sm leading-6 text-[#fff8df]/68">
-              Your information is only used to respond to your quote request.
-              For urgent storm cleanup or immediate tree concerns, calling or
-              texting is the fastest option.
-            </p>
-          </div>
-        </div>
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="inline-flex items-center justify-center gap-2 rounded-full bg-[#f0d488] px-7 py-4 text-base font-black uppercase tracking-[0.14em] text-[#07120d] shadow-xl shadow-black/25 transition hover:-translate-y-0.5 hover:bg-[#fff8df] disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0"
+        >
+          {isLoading ? (
+            <>
+              <Loader2 className="h-5 w-5 animate-spin" />
+              Sending
+            </>
+          ) : (
+            <>
+              Send Quote Request
+              <ArrowRight className="h-5 w-5" />
+            </>
+          )}
+        </button>
       </div>
     </form>
   );

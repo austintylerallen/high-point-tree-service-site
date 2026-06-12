@@ -1,10 +1,10 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   AlertTriangle,
   ArrowRight,
   CheckCircle2,
   ClipboardCheck,
-  Home,
   MapPin,
   Phone,
   ShieldCheck,
@@ -16,13 +16,14 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 
 const phoneNumber = "(505) 372-9043";
+const phoneHref = "tel:5053729043";
 
 const serviceAreas = [
   "Las Cruces",
   "Ruidoso",
   "Roswell",
   "Alamogordo",
-  "Surrounding Areas",
+  "Nearby Areas",
 ];
 
 const serviceNav = [
@@ -56,29 +57,29 @@ const problemGuides = [
   {
     title: "A tree looks unsafe",
     description:
-      "Leaning trunks, dead limbs, cracked wood, or storm damage should be checked before the issue becomes a bigger risk.",
-    recommendation: "Tree assessment or removal",
+      "Leaning trunks, dead limbs, cracked wood, weak branches, or storm damage should be looked at before the issue becomes a bigger risk.",
+    recommendation: "Tree assessment or tree removal",
     icon: ShieldCheck,
   },
   {
     title: "Branches are too close",
     description:
-      "Overgrown limbs near roofs, fences, driveways, walkways, or utility areas can create clearance and safety concerns.",
-    recommendation: "Trimming or pruning",
+      "Overgrown limbs near roofs, fences, driveways, walkways, or utility areas can create clearance problems and safety concerns.",
+    recommendation: "Tree trimming or pruning",
     icon: ClipboardCheck,
   },
   {
     title: "A storm left a mess",
     description:
-      "Wind and rough weather can leave fallen branches, blocked access, and scattered tree debris across the property.",
-    recommendation: "Storm cleanup",
+      "Wind and rough New Mexico weather can leave fallen branches, blocked access, broken limbs, and scattered tree debris across the property.",
+    recommendation: "Storm damage cleanup",
     icon: AlertTriangle,
   },
   {
     title: "The yard feels unfinished",
     description:
-      "Old stumps, brush piles, and leftover debris can make a property harder to maintain even after the main work is done.",
-    recommendation: "Stump grinding or cleanup",
+      "Old stumps, brush piles, and leftover debris can make a property harder to mow, maintain, landscape, or use safely.",
+    recommendation: "Stump grinding or property cleanup",
     icon: Wrench,
   },
 ];
@@ -105,7 +106,7 @@ const services = [
     slug: "tree-trimming-pruning",
     eyebrow: "Clearance, overgrowth, shaping, and maintenance",
     body:
-      "Trimming and pruning help clean up overgrowth, improve clearance, remove weak branches, and make the property easier to maintain. This is often the right choice when branches are near roofs, driveways, fences, sidewalks, or high-use areas.",
+      "Tree trimming and pruning help clean up overgrowth, improve clearance, remove weak branches, and make the property easier to maintain. This is often the right choice when branches are near roofs, driveways, fences, sidewalks, or high-use areas.",
     outcome:
       "Cleaner growth, better clearance, fewer nuisance branches, and a more controlled-looking property.",
     signs: [
@@ -121,9 +122,9 @@ const services = [
     slug: "stump-grinding",
     eyebrow: "Old stumps, fresh removals, and usable yard space",
     body:
-      "Stump grinding removes old or freshly cut stumps so the yard is safer, cleaner, and easier to use. It is helpful when a stump creates a tripping hazard, makes mowing difficult, or leaves the property looking unfinished.",
+      "Stump grinding removes old or freshly cut stumps so the yard is safer, cleaner, and easier to use. It is helpful when a stump creates a tripping hazard, makes mowing difficult, attracts pests, or leaves the property looking unfinished.",
     outcome:
-      "A cleaner yard with less obstruction, fewer trip hazards, and more usable outdoor space.",
+      "A cleaner yard with fewer obstructions, fewer trip hazards, and more usable outdoor space.",
     signs: [
       "Old stump taking up space",
       "Fresh removal left a stump behind",
@@ -137,9 +138,9 @@ const services = [
     slug: "storm-damage-cleanup",
     eyebrow: "Fallen limbs, broken branches, and urgent debris",
     body:
-      "Storm cleanup helps clear fallen limbs, broken branches, blocked access, and scattered tree debris after rough weather. The goal is to make the property safer, cleaner, and usable again.",
+      "Storm damage cleanup helps clear fallen limbs, broken branches, blocked access, and scattered tree debris after rough weather. The goal is to make the property safer, cleaner, and usable again.",
     outcome:
-      "Tree debris cleared, access restored, and the property brought back under control after rough weather.",
+      "Tree debris cleared, access restored, and the property brought back under control after wind or storm damage.",
     signs: [
       "Branches came down after wind",
       "Access is blocked",
@@ -153,7 +154,7 @@ const services = [
     slug: "tree-assessments",
     eyebrow: "Risk checks and practical next-step guidance",
     body:
-      "Tree assessments help property owners understand whether a tree needs trimming, removal, cleanup, or monitoring. This is useful when a tree looks questionable or when dead limbs, leaning, or storm damage create concern.",
+      "Tree assessments help property owners understand whether a tree needs trimming, removal, cleanup, or monitoring. This is useful when a tree looks questionable or when dead limbs, leaning, splitting, or storm damage create concern.",
     outcome:
       "A clearer understanding of what the tree needs and what the next step should be.",
     signs: [
@@ -182,10 +183,20 @@ const services = [
   },
 ];
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Tree Services in Southern New Mexico | High Point Tree Service LLC",
   description:
-    "Tree removal, trimming, pruning, stump grinding, storm damage cleanup, tree assessments, and property cleanup in Las Cruces, Ruidoso, Roswell, Alamogordo, and surrounding areas.",
+    "High Point Tree Service LLC provides tree removal, trimming, pruning, stump grinding, storm damage cleanup, tree assessments, and property cleanup in Las Cruces, Ruidoso, Roswell, Alamogordo, and nearby areas.",
+  alternates: {
+    canonical: "/services",
+  },
+  openGraph: {
+    title: "Tree Services in Southern New Mexico | High Point Tree Service LLC",
+    description:
+      "Tree removal, trimming, pruning, stump grinding, storm damage cleanup, tree assessments, and property cleanup for Southern New Mexico properties.",
+    url: "/services",
+    type: "website",
+  },
 };
 
 export default function ServicesPage() {
@@ -210,16 +221,16 @@ export default function ServicesPage() {
             </p>
 
             <h1 className="mt-4 max-w-4xl font-serif text-5xl font-black leading-[0.95] tracking-tight text-[#fff8df] sm:text-6xl lg:text-7xl">
-              Tree work matched to the problem on your property.
+              Tree services for safer, cleaner, easier-to-maintain properties.
             </h1>
           </div>
 
           <div className="lg:pb-2">
             <p className="max-w-2xl text-lg leading-8 text-[#d8d1bf]">
-              Some customers need a tree removed. Others need clearance,
-              cleanup, stump grinding, or someone to look at a tree that does
-              not seem right. This page breaks the services down by the actual
-              issue, not just a list of names.
+              High Point Tree Service helps property owners choose the right
+              solution for unsafe trees, overgrown branches, storm damage,
+              leftover stumps, and outdoor cleanup needs across Southern New
+              Mexico.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-x-5 gap-y-3 text-sm font-bold text-[#fff8df]">
@@ -249,9 +260,9 @@ export default function ServicesPage() {
             </h2>
 
             <p className="mt-5 max-w-md text-base leading-7 text-[#d8d1bf]">
-              This layout helps visitors quickly recognize their situation and
-              move into the correct service without making the page feel like a
-              generic card grid.
+              Not every tree problem starts with a clear service name. Use the
+              guide below to match the issue on the property with the service
+              that usually fits best.
             </p>
 
             <nav className="mt-8 border-l border-[#f0d488]/25">
@@ -314,6 +325,12 @@ export default function ServicesPage() {
             <h2 className="mt-4 font-serif text-4xl font-black tracking-tight text-[#fff8df] sm:text-5xl">
               The right service depends on what needs to be fixed.
             </h2>
+
+            <p className="mt-5 text-lg leading-8 text-[#d8d1bf]">
+              High Point handles common residential and commercial tree service
+              needs, from urgent cleanup after wind damage to planned trimming,
+              removal, stump grinding, and property cleanup.
+            </p>
           </div>
 
           <div className="mt-14 divide-y divide-[#f0d488]/16 border-y border-[#f0d488]/16">
@@ -395,16 +412,16 @@ export default function ServicesPage() {
             </p>
 
             <h2 className="mt-4 font-serif text-4xl font-black tracking-tight text-[#fff8df] sm:text-5xl">
-              Serving Southern New Mexico communities.
+              Serving Las Cruces, Ruidoso, Roswell, Alamogordo, and nearby
+              areas.
             </h2>
           </div>
 
           <div>
             <p className="text-lg leading-8 text-[#d8d1bf]">
-              High Point Tree Service serves Las Cruces, Ruidoso, Roswell,
-              Alamogordo, and surrounding areas. If a property is outside the
-              main service area, customers can still send the location to
-              confirm availability.
+              High Point Tree Service serves key Southern New Mexico
+              communities. If a property is outside the main service area,
+              customers can still send the location to confirm availability.
             </p>
 
             <div className="mt-7 flex flex-wrap gap-3">
@@ -432,7 +449,7 @@ export default function ServicesPage() {
             </p>
 
             <h2 className="mt-4 font-serif text-4xl font-black tracking-tight text-[#fff8df] sm:text-5xl">
-              Not sure which service fits?
+              Not sure which tree service fits?
             </h2>
           </div>
 
@@ -454,8 +471,8 @@ export default function ServicesPage() {
               </Link>
 
               <a
-                href={`tel:${phoneNumber}`}
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-[#f0d488]/25 bg-[#fff8df]/8 px-7 py-4 text-base font-black text-[#fff8df] transition hover:-translate-y-0.5 hover:bg-[#fff8df]/12 hover:text-[#f0d488]"
+                href={phoneHref}
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-[#f0d488]/25 bg-[#fff8df]/[0.08] px-7 py-4 text-base font-black text-[#fff8df] transition hover:-translate-y-0.5 hover:bg-[#fff8df]/[0.12] hover:text-[#f0d488]"
               >
                 <Phone className="h-5 w-5" />
                 Call {phoneNumber}

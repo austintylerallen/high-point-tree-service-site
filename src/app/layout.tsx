@@ -5,16 +5,37 @@ import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
+
   title: {
     default:
       "High Point Tree Service LLC | Tree Service in Southern New Mexico",
     template: "%s | High Point Tree Service LLC",
   },
+
   description: siteConfig.description,
+
   applicationName: siteConfig.name,
-  alternates: {
-    canonical: "/",
-  },
+  creator: "High Point Tree Service LLC",
+  publisher: "High Point Tree Service LLC",
+  category: "Tree Service",
+
+  keywords: [
+    "High Point Tree Service",
+    "High Point Tree Service LLC",
+    "tree service Southern New Mexico",
+    "tree service Las Cruces",
+    "tree service Ruidoso",
+    "tree service Roswell",
+    "tree service Alamogordo",
+    "tree removal",
+    "tree trimming",
+    "tree pruning",
+    "stump grinding",
+    "storm damage cleanup",
+    "tree assessments",
+    "property cleanup",
+  ],
+
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -31,14 +52,22 @@ export const metadata: Metadata = {
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
     title: "High Point Tree Service LLC | Tree Service in Southern New Mexico",
     description: siteConfig.description,
     images: [siteConfig.heroImage],
   },
+
   icons: {
     icon: "/favicon.ico",
+  },
+
+  formatDetection: {
+    telephone: false,
+    address: false,
+    email: false,
   },
 };
 
@@ -54,7 +83,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body>
         <LocalBusinessJsonLd />
         {children}

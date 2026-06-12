@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -13,13 +14,14 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 
 const phoneNumber = "(505) 372-9043";
+const phoneHref = "tel:5053729043";
 
 const serviceAreas = [
   "Las Cruces",
   "Ruidoso",
   "Roswell",
   "Alamogordo",
-  "Surrounding Areas",
+  "Nearby Areas",
 ];
 
 const services = [
@@ -35,27 +37,37 @@ const commitments = [
   {
     title: "Property-focused work",
     description:
-      "Tree work should be planned around nearby homes, fences, driveways, access points, landscaping, and cleanup needs.",
+      "Tree work is planned around the full property, including nearby homes, fences, driveways, access points, landscaping, and cleanup needs.",
     icon: ShieldCheck,
   },
   {
     title: "Clear communication",
     description:
-      "Customers can call, text, or send a quote request with the location, photos, urgency, and service details.",
+      "Customers can call, text, or send a quote request with the property location, photos, urgency, and service details so the next step is easier to understand.",
     icon: MessageSquare,
   },
   {
     title: "Practical next steps",
     description:
-      "Not every customer knows whether they need removal, trimming, cleanup, or an assessment. High Point helps identify the right direction.",
+      "Not every customer knows whether a tree needs removal, trimming, cleanup, or an assessment. High Point helps identify the right direction before the work begins.",
     icon: ClipboardCheck,
   },
 ];
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "About High Point Tree Service LLC | Southern New Mexico Tree Service",
   description:
-    "Learn about High Point Tree Service LLC, a locally owned tree service company serving Las Cruces, Ruidoso, Roswell, Alamogordo, and surrounding areas.",
+    "High Point Tree Service LLC is a locally owned tree service company serving Las Cruces, Ruidoso, Roswell, Alamogordo, and nearby Southern New Mexico communities.",
+  alternates: {
+    canonical: "/about",
+  },
+  openGraph: {
+    title: "About High Point Tree Service LLC",
+    description:
+      "Locally owned tree service for removal, trimming, pruning, stump grinding, storm damage cleanup, and property-focused tree work across Southern New Mexico.",
+    url: "/about",
+    type: "website",
+  },
 };
 
 export default function AboutPage() {
@@ -80,17 +92,19 @@ export default function AboutPage() {
             </p>
 
             <h1 className="mt-4 max-w-4xl font-serif text-5xl font-black leading-[0.96] tracking-tight text-[#fff8df] sm:text-6xl lg:text-7xl">
-              A local tree service built around trust, safety, and clean work.
+              Local tree service focused on safe work, clear communication, and
+              clean results.
             </h1>
           </div>
 
           <div className="rounded-[2rem] border border-[#f0d488]/18 bg-[#07120d]/60 p-6 shadow-2xl shadow-black/25 backdrop-blur-xl sm:p-8">
             <p className="text-lg leading-8 text-[#d8d1bf]">
               High Point Tree Service LLC is a locally owned tree service
-              company serving Southern New Mexico. Owned by Josh and Liana, the
-              business helps property owners handle tree removal, trimming,
-              pruning, stump grinding, storm cleanup, tree assessments, and
-              property cleanup.
+              company serving residential and commercial properties across
+              Southern New Mexico. Owned by Josh and Liana, the business helps
+              property owners with tree removal, trimming, pruning, stump
+              grinding, storm damage cleanup, tree assessments, and property
+              cleanup.
             </p>
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
@@ -103,7 +117,7 @@ export default function AboutPage() {
               </Link>
 
               <a
-                href={`tel:${phoneNumber}`}
+                href={phoneHref}
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-[#f0d488]/25 bg-[#fff8df]/[0.08] px-6 py-3 text-sm font-black uppercase tracking-[0.14em] text-[#fff8df] transition hover:-translate-y-0.5 hover:bg-[#fff8df]/[0.12] hover:text-[#f0d488]"
               >
                 <Phone className="h-4 w-4" />
@@ -129,9 +143,9 @@ export default function AboutPage() {
             </h2>
 
             <p className="mt-5 max-w-xl text-lg leading-8 text-[#d8d1bf]">
-              A good tree service page should explain more than a list of
-              services. Customers need to understand that the crew is thinking
-              about the whole property.
+              The right tree service should look at the full property, not just
+              the branches or stump in front of them. High Point focuses on
+              access, safety, cleanup, and protecting the areas around the work.
             </p>
           </aside>
 
@@ -179,7 +193,8 @@ export default function AboutPage() {
 
             <p className="mt-5 max-w-xl text-lg leading-8 text-[#d8d1bf]">
               High Point Tree Service handles common residential and commercial
-              tree needs across Southern New Mexico.
+              tree needs across Southern New Mexico, from urgent cleanup to
+              planned maintenance.
             </p>
           </div>
 
@@ -206,16 +221,16 @@ export default function AboutPage() {
             </p>
 
             <h2 className="mt-4 font-serif text-4xl font-black tracking-tight text-[#fff8df] sm:text-5xl">
-              Serving key Southern New Mexico communities.
+              Serving Las Cruces, Ruidoso, Roswell, Alamogordo, and nearby
+              areas.
             </h2>
           </div>
 
           <div>
             <p className="text-lg leading-8 text-[#d8d1bf]">
-              High Point Tree Service serves Las Cruces, Ruidoso, Roswell,
-              Alamogordo, and surrounding areas. If a property is outside the
-              main service area, customers can still send the location to
-              confirm availability.
+              High Point Tree Service serves key Southern New Mexico
+              communities. If a property is outside the main service area,
+              customers can still send the location to confirm availability.
             </p>
 
             <div className="mt-7 flex flex-wrap gap-3">
@@ -248,7 +263,8 @@ export default function AboutPage() {
           <div>
             <p className="text-lg leading-8 text-[#d8d1bf]">
               Send the property location, a short description, and photos if
-              available. High Point can help determine the right next step.
+              available. High Point can help determine the right next step for
+              removal, trimming, stump grinding, cleanup, or assessment.
             </p>
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
