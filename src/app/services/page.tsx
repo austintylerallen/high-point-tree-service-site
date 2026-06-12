@@ -16,7 +16,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 
 const phoneNumber = "(505) 372-9043";
-const phoneHref = "tel:5053729043";
+const phoneHref = "tel:+15053729043";
 
 const serviceAreas = [
   "Las Cruces",

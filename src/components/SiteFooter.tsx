@@ -6,6 +6,8 @@ const phoneNumber = "(505) 372-9043";
 const smsNumber = "5053729043";
 const emailAddress = "info@highpointtreeservicenm.com";
 const logoSrc = "/images/logo/high-point-tree-service-logo-v2.png";
+const phoneHref = "tel:+15053729043";
+const smsHref = "sms:+15053729043";
 
 export default function SiteFooter() {
   return (
@@ -41,7 +43,7 @@ export default function SiteFooter() {
             <p className="mt-6 max-w-2xl text-sm leading-7 text-stone-300">
               Tree removal, trimming, pruning, stump grinding, storm cleanup,
               and tree assessments across Las Cruces, Ruidoso, Roswell,
-              Alamogordo, and surrounding areas.
+              Alamogordo, and nearby areas.
             </p>
           </div>
 
@@ -72,14 +74,14 @@ export default function SiteFooter() {
 
             <div className="mt-4 grid gap-2 text-sm text-stone-300">
               <a
-                href={`tel:${phoneNumber}`}
+                href={phoneHref}
                 className="transition hover:text-[#f0d488]"
               >
                 {phoneNumber}
               </a>
 
               <a
-                href={`sms:${smsNumber}`}
+               href={smsHref}
                 className="transition hover:text-[#f0d488]"
               >
                 Text photos
@@ -105,7 +107,7 @@ export default function SiteFooter() {
 
       <div className="fixed bottom-0 left-0 right-0 z-50 grid grid-cols-2 border-t border-[#f0d488]/15 bg-[#07120d]/95 p-3 shadow-2xl backdrop-blur-xl md:hidden">
         <a
-          href={`tel:${phoneNumber}`}
+         href={phoneHref}
           className="mr-2 inline-flex items-center justify-center gap-2 rounded-xl bg-[#f0d488] px-4 py-3 text-sm font-black text-[#07120d]"
         >
           <Phone className="h-4 w-4" />

@@ -7,7 +7,7 @@ export const siteConfig = {
     "https://highpointtreeservicenm.com",
 
   phone: "(505) 372-9043",
-  phoneHref: "tel:5053729043",
+  phoneHref: "tel:+15053729043",
   phoneE164: "+15053729043",
 
   email: "info@highpointtreeservicenm.com",

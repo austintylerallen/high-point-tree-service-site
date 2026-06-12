@@ -7,6 +7,7 @@ type SiteHeaderProps = {
 };
 
 const phoneNumber = "(505) 372-9043";
+const phoneHref = "tel:+15053729043";
 const logoSrc = "/images/logo/high-point-tree-service-logo-v2.png";
 
 const navItems = [
@@ -87,7 +88,7 @@ export default function SiteHeader({ activePage = "home" }: SiteHeaderProps) {
       </nav>
 
       <a
-        href={`tel:${phoneNumber}`}
+        href={phoneHref}
         className="hidden items-center justify-center gap-2 rounded-full bg-[#f0d488] px-5 py-3 text-sm font-black text-[#07120d] shadow-lg shadow-black/25 transition hover:-translate-y-0.5 hover:bg-[#ffe7a2] md:inline-flex"
       >
         <Phone className="h-4 w-4" />
