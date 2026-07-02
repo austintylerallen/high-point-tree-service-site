@@ -138,9 +138,9 @@ export default function GalleryPage() {
             </p>
 
             <p className="mt-5 text-sm leading-7 text-[#fff8df]/70">
-              Real project photos can be added here later. For now, this page
-              explains the types of work customers can request without making
-              the site look like it has missing gallery images.
+              Use this guide to understand the types of tree work High Point
+              handles and the common property concerns customers call about
+              before requesting an estimate.
             </p>
           </div>
         </div>
