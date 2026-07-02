@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site";
 import { servicePages } from "@/lib/services";
+import { serviceAreaPages } from "@/lib/serviceAreas";
 
 type SitemapRoute = {
   path: string;
@@ -45,10 +46,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "monthly",
   }));
 
-  return [...staticRoutes, ...serviceRoutes].map((route) => ({
-    url: `${siteConfig.url}${route.path}`,
-    lastModified,
-    changeFrequency: route.changeFrequency,
-    priority: route.priority,
+  const serviceAreaRoutes: SitemapRoute[] = serviceAreaPages.map((area) => ({
+    path: `/service-areas/${area.slug}`,
+    priority: 0.8,
+    changeFrequency: "monthly",
   }));
+
+  return [...staticRoutes, ...serviceRoutes, ...serviceAreaRoutes].map(
+    (route) => ({
+      url: `${siteConfig.url}${route.path}`,
+      lastModified,
+      changeFrequency: route.changeFrequency,
+      priority: route.priority,
+    })
+  );
 }
