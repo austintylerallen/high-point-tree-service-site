@@ -4,11 +4,8 @@ import { notFound } from "next/navigation";
 import {
   ArrowRight,
   CheckCircle2,
-  ClipboardCheck,
   MapPin,
   Phone,
-  ShieldCheck,
-  TreePine,
 } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -83,6 +80,7 @@ export default async function ServiceAreaDetailPage({
   const serviceAreaSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
+    "@id": `${siteConfig.url}/#localbusiness`,
     name: siteConfig.name,
     telephone: siteConfig.phoneE164,
     url: `${siteConfig.url}/service-areas/${area.slug}`,
@@ -109,7 +107,7 @@ export default async function ServiceAreaDetailPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(serviceAreaSchema),
+          __html: JSON.stringify(serviceAreaSchema).replace(/</g, "\\u003c"),
         }}
       />
 
@@ -128,10 +126,10 @@ export default async function ServiceAreaDetailPage({
         <div className="relative mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
           <div>
             <Link
-              href="/services"
+              href="/service-areas"
               className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.18em] text-[#f0d488] transition hover:text-[#fff8df]"
             >
-              Services
+              Service Areas
               <ArrowRight className="h-4 w-4" />
             </Link>
 
@@ -174,7 +172,7 @@ export default async function ServiceAreaDetailPage({
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#10251b] px-5 py-24 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-[#10251b] px-5 py-20 sm:px-6 lg:px-8">
         <div className="absolute inset-0 bg-[linear-gradient(135deg,#10251b_0%,#203f29_52%,#10251b_100%)]" />
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#f0d488]/70 to-transparent" />
 
@@ -185,7 +183,7 @@ export default async function ServiceAreaDetailPage({
             </p>
 
             <h2 className="mt-4 font-serif text-4xl font-black tracking-tight text-[#fff8df] sm:text-5xl">
-              Tree work for properties in {area.city}.
+              Common property concerns in {area.city}.
             </h2>
 
             <p className="mt-5 max-w-xl text-lg leading-8 text-[#d8d1bf]">
@@ -193,9 +191,12 @@ export default async function ServiceAreaDetailPage({
             </p>
           </div>
 
-          <div className="grid gap-px overflow-hidden rounded-[2rem] border border-[#f0d488]/18 bg-[#f0d488]/18 shadow-2xl shadow-black/25 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2">
             {area.propertyConcerns.map((concern) => (
-              <div key={concern} className="bg-[#07120d]/92 p-6">
+              <div
+                key={concern}
+                className="rounded-[1.4rem] border border-[#f0d488]/16 bg-[#07120d]/70 p-5"
+              >
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-[#f0d488]" />
                   <p className="font-black leading-7 text-[#fff8df]">
@@ -208,25 +209,24 @@ export default async function ServiceAreaDetailPage({
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#07120d] px-5 py-24 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-[#07120d] px-5 py-20 sm:px-6 lg:px-8">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(240,212,136,0.14),transparent_26%),radial-gradient(circle_at_82%_55%,rgba(32,63,41,0.8),transparent_34%),linear-gradient(135deg,#07120d_0%,#10251b_58%,#07120d_100%)]" />
 
         <div className="relative mx-auto max-w-7xl">
           <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
             <div>
               <p className="text-sm font-black uppercase tracking-[0.24em] text-[#f0d488]">
-                Services in {area.city}
+                Available Services
               </p>
 
               <h2 className="mt-4 font-serif text-4xl font-black tracking-tight text-[#fff8df] sm:text-5xl">
-                Common tree service needs in {area.city}.
+                Choose the service that matches the problem.
               </h2>
             </div>
 
             <p className="text-lg leading-8 text-[#d8d1bf] lg:ml-auto lg:max-w-2xl">
-              Choose the service that best matches the issue on the property.
-              If the right solution is not obvious, High Point can review the
-              tree concern and recommend the next step.
+              The right solution depends on the tree, access, surrounding
+              structures, cleanup needs, and how urgent the concern is.
             </p>
           </div>
 
@@ -247,7 +247,7 @@ export default async function ServiceAreaDetailPage({
                   </h3>
 
                   <p className="mt-3 text-sm leading-7 text-[#d8d1bf]">
-                    {service.body}
+                    {service.intro}
                   </p>
 
                   <span className="mt-5 inline-flex items-center gap-2 text-sm font-black text-[#f0d488]">
@@ -261,7 +261,7 @@ export default async function ServiceAreaDetailPage({
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#183722] px-5 py-24 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-[#183722] px-5 py-20 sm:px-6 lg:px-8">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(255,248,223,0.10),transparent_28%),radial-gradient(circle_at_84%_40%,rgba(240,212,136,0.16),transparent_30%),linear-gradient(135deg,#10251b_0%,#203f29_56%,#07120d_100%)]" />
 
         <div className="relative mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
@@ -271,13 +271,12 @@ export default async function ServiceAreaDetailPage({
             </p>
 
             <h2 className="mt-4 font-serif text-4xl font-black tracking-tight text-[#fff8df] sm:text-5xl">
-              Serving {area.city} and nearby areas.
+              Areas High Point can review for service.
             </h2>
 
             <p className="mt-5 max-w-xl text-lg leading-8 text-[#d8d1bf]">
-              Service availability can depend on the job size, travel distance,
-              schedule, access, and type of tree work needed. Send the property
-              location to confirm the best next step.
+              Availability can depend on job size, travel distance, access,
+              schedule, and the type of tree work needed.
             </p>
           </div>
 
@@ -309,7 +308,7 @@ export default async function ServiceAreaDetailPage({
             </p>
 
             <h2 className="mt-4 font-serif text-4xl font-black tracking-tight text-[#fff8df] sm:text-5xl">
-              Request a tree service estimate in {area.city}.
+              Request an estimate in {area.city}.
             </h2>
           </div>
 

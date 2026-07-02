@@ -35,6 +35,11 @@ const staticRoutes: SitemapRoute[] = [
     priority: 0.6,
     changeFrequency: "monthly",
   },
+  {
+    path: "/service-areas",
+    priority: 0.8,
+    changeFrequency: "monthly",
+  },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

@@ -3,102 +3,84 @@ import Link from "next/link";
 import {
   AlertTriangle,
   ArrowRight,
-  CheckCircle2,
   ClipboardCheck,
   MapPin,
   Phone,
-  ShieldCheck,
-  TreePine,
-  Truck,
   Wrench,
 } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { siteConfig } from "@/lib/site";
 
-const workItems = [
+const quoteTips = [
   {
-    title: "Tree Removal",
-    location: "Southern New Mexico",
+    title: "Start with the location",
     description:
-      "Removal support for dead, damaged, leaning, crowded, or unwanted trees that need careful planning around nearby structures, fences, driveways, and outdoor spaces.",
-    icon: TreePine,
+      "Share the city, neighborhood, or property address so High Point can confirm availability and understand the access needs.",
+    icon: MapPin,
   },
   {
-    title: "Tree Trimming & Pruning",
-    location: "Southern New Mexico",
+    title: "Show the full tree or area",
     description:
-      "Trimming and pruning for overgrown limbs, roof clearance, walkways, fences, visibility, shaping, and routine tree maintenance.",
+      "Photos are most helpful when they show the whole tree, nearby structures, driveways, fences, and the surrounding space.",
     icon: ClipboardCheck,
   },
   {
-    title: "Storm Damage Cleanup",
-    location: "Southern New Mexico",
+    title: "Include the main concern",
     description:
-      "Cleanup for fallen limbs, broken branches, blocked access, and tree debris after wind, storms, and rough New Mexico weather.",
+      "Mention whether the issue is a dead tree, overgrown limbs, storm debris, a stump, blocked access, or general cleanup.",
     icon: AlertTriangle,
   },
   {
-    title: "Stump Grinding",
-    location: "Southern New Mexico",
+    title: "Mention access or obstacles",
     description:
-      "Grinding and cleanup for old or freshly cut stumps that make a yard harder to mow, use, maintain, or landscape.",
+      "Let High Point know about gates, narrow driveways, slopes, pets, utilities, or anything that may affect the work area.",
     icon: Wrench,
   },
-  {
-    title: "Property Cleanup",
-    location: "Southern New Mexico",
-    description:
-      "Brush, limbs, tree debris, and cleanup support after removals, trimming, storm damage, or neglected outdoor areas.",
-    icon: Truck,
-  },
-  {
-    title: "Tree Assessments",
-    location: "Southern New Mexico",
-    description:
-      "Property walkthroughs to help determine whether a tree needs removal, trimming, cleanup, grinding, monitoring, or another next step.",
-    icon: ShieldCheck,
-  },
 ];
 
-const workPriorities = [
-  {
-    title: "Property safety",
-    description:
-      "Tree work is planned around homes, fences, driveways, landscaping, access points, and the spaces people use every day.",
-  },
-  {
-    title: "Cleaner outdoor spaces",
-    description:
-      "Removal, trimming, grinding, and cleanup services help make the property easier to access, maintain, and use.",
-  },
-  {
-    title: "Clear next steps",
-    description:
-      "When the right solution is not obvious, High Point can review the concern and help determine whether the property needs removal, trimming, cleanup, grinding, or an assessment.",
-  },
+const urgentSigns = [
+  "A tree is leaning more than usual or appears unstable",
+  "Large limbs are cracked, hanging, or close to falling",
+  "Branches are touching the roof, structure, or access area",
+  "Storm debris is blocking a driveway, gate, walkway, or yard",
+  "A dead or damaged tree is near people, vehicles, fences, or buildings",
 ];
 
-const commonRequests = [
-  "Dead, damaged, or unwanted tree removal",
-  "Overgrown limb trimming and pruning",
-  "Stump grinding and yard cleanup",
-  "Storm damage and fallen branch cleanup",
-  "Brush, limb, and tree debris removal",
-  "Tree assessments and property walkthroughs",
+const processSteps = [
+  {
+    title: "Review the concern",
+    description:
+      "High Point reviews the tree, property location, photos, and the reason the customer reached out.",
+  },
+  {
+    title: "Match the right service",
+    description:
+      "The next step may be removal, trimming, pruning, stump grinding, cleanup, or a closer assessment.",
+  },
+  {
+    title: "Plan around the property",
+    description:
+      "Work is planned around access, structures, fences, driveways, landscaping, and cleanup expectations.",
+  },
+  {
+    title: "Handle the work clearly",
+    description:
+      "The goal is practical tree service, clear communication, and a safer, cleaner finished space.",
+  },
 ];
 
 export const metadata: Metadata = {
   title: "Tree Service Work Guide | High Point Tree Service LLC",
   description:
-    "Learn how High Point Tree Service LLC helps with tree removal, trimming, pruning, stump grinding, storm damage cleanup, tree assessments, and property cleanup across Southern New Mexico.",
+    "Use this tree service guide to understand what to send with a quote request, when tree work may be urgent, and how High Point Tree Service approaches property-focused tree work.",
   alternates: {
     canonical: "/gallery",
   },
   openGraph: {
     title: "Tree Service Work Guide | High Point Tree Service LLC",
     description:
-      "Tree removal, trimming, pruning, stump grinding, storm damage cleanup, tree assessments, and property cleanup across Southern New Mexico.",
+      "A practical guide for requesting tree removal, trimming, stump grinding, storm cleanup, assessments, and property cleanup from High Point Tree Service.",
     url: "/gallery",
     type: "website",
   },
@@ -126,27 +108,25 @@ export default function GalleryPage() {
             </p>
 
             <h1 className="mt-4 max-w-4xl font-serif text-5xl font-black leading-[0.96] tracking-tight text-[#fff8df] sm:text-6xl lg:text-7xl">
-              Tree service work focused on safer, cleaner properties.
+              Make your tree service request easier to review.
             </h1>
           </div>
 
           <div className="rounded-[2rem] border border-[#f0d488]/18 bg-[#07120d]/60 p-6 shadow-2xl shadow-black/25 backdrop-blur-xl sm:p-8">
             <p className="text-lg leading-8 text-[#d8d1bf]">
-              High Point Tree Service helps property owners choose the right
-              next step for tree removal, trimming, pruning, stump grinding,
-              storm damage cleanup, tree assessments, and property cleanup.
+              A clear request helps High Point understand the property, the tree
+              concern, and the safest next step before scheduling tree work.
             </p>
 
             <p className="mt-5 text-sm leading-7 text-[#fff8df]/70">
-              Use this guide to understand the types of tree work High Point
-              handles and the common property concerns customers call about
-              before requesting an estimate.
+              This guide explains what to include, when a tree issue may need
+              faster attention, and how the work is typically reviewed.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#10251b] px-5 py-24 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-[#10251b] px-5 py-20 sm:px-6 lg:px-8">
         <div className="absolute inset-0 bg-[linear-gradient(135deg,#10251b_0%,#203f29_52%,#10251b_100%)]" />
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#f0d488]/60 to-transparent" />
 
@@ -154,49 +134,39 @@ export default function GalleryPage() {
           <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
             <div>
               <p className="text-sm font-black uppercase tracking-[0.24em] text-[#f0d488]">
-                Service Categories
+                Quote Requests
               </p>
 
               <h2 className="mt-4 font-serif text-4xl font-black tracking-tight text-[#fff8df] sm:text-5xl">
-                Tree work organized by the problems property owners need solved.
+                What to send when requesting an estimate.
               </h2>
             </div>
 
             <p className="max-w-2xl text-lg leading-8 text-[#d8d1bf] lg:ml-auto">
-              Whether the issue is a hazardous tree, overgrown limbs, a stump in
-              the way, storm debris, or a property that needs cleanup, High
-              Point helps customers choose the right next step.
+              Customers do not need to know the exact service name. The best
+              starting point is a clear description, the property location, and
+              photos that show the concern.
             </p>
           </div>
 
-          <div className="mt-14 grid gap-px overflow-hidden rounded-[2.4rem] border border-[#f0d488]/18 bg-[#f0d488]/18 shadow-2xl shadow-black/25 md:grid-cols-2 lg:grid-cols-3">
-            {workItems.map((item) => {
+          <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {quoteTips.map((item) => {
               const Icon = item.icon;
 
               return (
                 <article
                   key={item.title}
-                  className="group relative overflow-hidden bg-[#07120d] p-7"
+                  className="rounded-[1.6rem] border border-[#f0d488]/16 bg-[#07120d]/70 p-6 shadow-xl shadow-black/15"
                 >
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(240,212,136,0.13),transparent_32%),radial-gradient(circle_at_80%_80%,rgba(32,63,41,0.65),transparent_42%),linear-gradient(135deg,#07120d,#10251b)] opacity-90 transition duration-500 group-hover:opacity-100" />
+                  <Icon className="h-7 w-7 text-[#f0d488]" />
 
-                  <div className="relative">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-[#f0d488]/20 bg-[#07120d]/70 text-[#f0d488]">
-                      <Icon className="h-7 w-7" />
-                    </div>
+                  <h3 className="mt-5 font-serif text-2xl font-black text-[#fff8df]">
+                    {item.title}
+                  </h3>
 
-                    <p className="mt-8 text-xs font-black uppercase tracking-[0.2em] text-[#f0d488]">
-                      {item.location}
-                    </p>
-
-                    <h3 className="mt-2 font-serif text-3xl font-black text-[#fff8df]">
-                      {item.title}
-                    </h3>
-
-                    <p className="mt-4 text-sm leading-7 text-[#d8d1bf]">
-                      {item.description}
-                    </p>
-                  </div>
+                  <p className="mt-3 text-sm leading-7 text-[#d8d1bf]">
+                    {item.description}
+                  </p>
                 </article>
               );
             })}
@@ -204,44 +174,34 @@ export default function GalleryPage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#07120d] px-5 py-24 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-[#07120d] px-5 py-20 sm:px-6 lg:px-8">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(240,212,136,0.13),transparent_26%),radial-gradient(circle_at_82%_55%,rgba(32,63,41,0.8),transparent_34%),linear-gradient(135deg,#07120d_0%,#10251b_58%,#07120d_100%)]" />
 
-        <div className="relative mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+        <div className="relative mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
           <div>
             <p className="text-sm font-black uppercase tracking-[0.24em] text-[#f0d488]">
-              Work Standards
+              When to Reach Out
             </p>
 
             <h2 className="mt-4 font-serif text-4xl font-black tracking-tight text-[#fff8df] sm:text-5xl">
-              The goal is safe work, clear access, and a cleaner finished space.
+              Some tree concerns should not wait too long.
             </h2>
 
             <p className="mt-5 max-w-xl text-lg leading-8 text-[#d8d1bf]">
-              Tree work affects more than the tree itself. High Point plans each
-              job around the surrounding property, cleanup needs, and the reason
-              the customer requested help in the first place.
+              Tree problems can become more serious when they involve unstable
+              trees, hanging limbs, storm damage, blocked access, or branches
+              near structures and high-use areas.
             </p>
           </div>
 
-          <div className="grid gap-4">
-            {workPriorities.map((item) => (
-              <div
-                key={item.title}
-                className="rounded-[1.6rem] border border-[#f0d488]/18 bg-[#10251b]/70 p-6 shadow-xl shadow-black/15"
-              >
-                <div className="flex gap-4">
-                  <ShieldCheck className="mt-1 h-6 w-6 shrink-0 text-[#f0d488]" />
-
-                  <div>
-                    <h3 className="font-serif text-2xl font-black text-[#fff8df]">
-                      {item.title}
-                    </h3>
-
-                    <p className="mt-3 leading-7 text-[#d8d1bf]">
-                      {item.description}
-                    </p>
-                  </div>
+          <div className="grid gap-px overflow-hidden rounded-[2rem] border border-[#f0d488]/18 bg-[#f0d488]/18 shadow-2xl shadow-black/25">
+            {urgentSigns.map((item) => (
+              <div key={item} className="bg-[#10251b]/92 p-6">
+                <div className="flex items-start gap-3">
+                  <AlertTriangle className="mt-1 h-5 w-5 shrink-0 text-[#f0d488]" />
+                  <p className="font-black leading-7 text-[#fff8df]">
+                    {item}
+                  </p>
                 </div>
               </div>
             ))}
@@ -249,32 +209,46 @@ export default function GalleryPage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#183722] px-5 py-24 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-[#183722] px-5 py-20 sm:px-6 lg:px-8">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(255,248,223,0.10),transparent_28%),radial-gradient(circle_at_84%_40%,rgba(240,212,136,0.16),transparent_30%),linear-gradient(135deg,#10251b_0%,#203f29_56%,#07120d_100%)]" />
 
-        <div className="relative mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
+        <div className="relative mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
           <div>
             <p className="text-sm font-black uppercase tracking-[0.24em] text-[#f0d488]">
-              Common Requests
+              How It Works
             </p>
 
             <h2 className="mt-4 font-serif text-4xl font-black tracking-tight text-[#fff8df] sm:text-5xl">
-              Tree service support for residential and commercial properties.
+              A practical review before the work begins.
             </h2>
 
             <p className="mt-5 max-w-xl text-lg leading-8 text-[#d8d1bf]">
-              Customers often reach out when a tree looks unsafe, limbs are too
-              close to structures, storm debris is blocking access, or a stump
-              is making the property harder to maintain.
+              High Point focuses on the tree, the surrounding property, and the
+              outcome the customer needs, not just a one-size-fits-all service
+              label.
             </p>
           </div>
 
-          <div className="grid gap-px overflow-hidden rounded-[2rem] border border-[#f0d488]/18 bg-[#f0d488]/18 shadow-2xl shadow-black/25 sm:grid-cols-2">
-            {commonRequests.map((item) => (
-              <div key={item} className="bg-[#07120d]/90 p-6">
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-[#f0d488]" />
-                  <p className="font-black text-[#fff8df]">{item}</p>
+          <div className="grid gap-4">
+            {processSteps.map((item, index) => (
+              <div
+                key={item.title}
+                className="rounded-[1.6rem] border border-[#f0d488]/18 bg-[#07120d]/70 p-6 shadow-xl shadow-black/15"
+              >
+                <div className="flex gap-4">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#f0d488] text-sm font-black text-[#07120d]">
+                    {index + 1}
+                  </div>
+
+                  <div>
+                    <h3 className="font-serif text-2xl font-black text-[#fff8df]">
+                      {item.title}
+                    </h3>
+
+                    <p className="mt-2 leading-7 text-[#d8d1bf]">
+                      {item.description}
+                    </p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -299,8 +273,7 @@ export default function GalleryPage() {
           <div>
             <p className="text-lg leading-8 text-[#d8d1bf]">
               High Point Tree Service serves {siteConfig.serviceAreaLabel}.
-              Customers can send the property location to confirm availability
-              and request the right tree service for the job.
+              Send the property location to confirm availability.
             </p>
 
             <div className="mt-7 flex flex-wrap gap-3">
@@ -326,15 +299,14 @@ export default function GalleryPage() {
             </p>
 
             <h2 className="mt-4 font-serif text-4xl font-black tracking-tight text-[#fff8df] sm:text-5xl">
-              Need tree work handled?
+              Ready to send the details?
             </h2>
           </div>
 
           <div>
             <p className="text-lg leading-8 text-[#d8d1bf]">
               Send the property location, a short description, and photos if
-              available. High Point can help determine the right next step for
-              removal, trimming, stump grinding, cleanup, or assessment.
+              available. High Point can help determine the right next step.
             </p>
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">

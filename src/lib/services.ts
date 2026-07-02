@@ -129,7 +129,7 @@ export const servicePages: ServicePage[] = [
     intro:
       "Stump grinding helps remove old or freshly cut stumps so the yard is easier to mow, maintain, landscape, and use.",
     body:
-      "A leftover stump can make a property feel unfinished and create practical problems in the yard. Grinding is often useful when a stump is in the way, difficult to mow around, visually distracting, or creating a trip hazard.",
+      "A leftover stump can create practical problems in the yard. Grinding is often useful when a stump is in the way, difficult to mow around, visually distracting, or creating a trip hazard.",
     outcome:
       "A cleaner yard with fewer obstructions, fewer trip hazards, and more usable outdoor space.",
     signs: [

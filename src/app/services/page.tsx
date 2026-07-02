@@ -67,7 +67,7 @@ const problemGuides = [
     icon: AlertTriangle,
   },
   {
-    title: "The yard feels unfinished",
+    title: "The yard needs cleanup",
     description:
       "Old stumps, brush piles, and leftover debris can make a property harder to mow, maintain, landscape, or use safely.",
     recommendation: "Stump grinding or property cleanup",

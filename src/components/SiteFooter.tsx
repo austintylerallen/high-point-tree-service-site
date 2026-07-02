@@ -76,7 +76,12 @@ export default function SiteFooter() {
           </div>
 
           <div>
-            <p className="font-black text-[#fff8df]">Service Areas</p>
+            <Link
+              href="/service-areas"
+              className="font-black text-[#fff8df] transition hover:text-[#f0d488]"
+            >
+              Service Areas
+            </Link>
 
             <div className="mt-4 grid gap-2 text-sm text-stone-300">
               {serviceAreaPages.map((area) => (
@@ -106,7 +111,7 @@ export default function SiteFooter() {
                 href={siteConfig.smsHref}
                 className="transition hover:text-[#f0d488]"
               >
-                Text photos
+                Text Job Photos
               </a>
 
               <a
