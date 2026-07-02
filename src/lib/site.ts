@@ -5,10 +5,12 @@ export const siteConfig = {
   url:
     process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
     "https://highpointtreeservicenm.com",
+  domainLabel: "highpointtreeservicenm.com",
 
   phone: "(505) 372-9043",
   phoneHref: "tel:+15053729043",
   phoneE164: "+15053729043",
+  smsHref: "sms:+15053729043",
 
   email: "info@highpointtreeservicenm.com",
 
@@ -64,12 +66,21 @@ export const siteConfig = {
 
   services: [
     "Tree removal",
-    "Tree trimming",
-    "Tree pruning",
+    "Tree trimming and pruning",
     "Stump grinding",
     "Storm damage cleanup",
     "Tree assessments",
     "Property cleanup",
+  ],
+
+  quoteServiceOptions: [
+    "Tree removal",
+    "Tree trimming and pruning",
+    "Stump grinding",
+    "Storm damage cleanup",
+    "Tree assessment",
+    "Property cleanup",
+    "Not sure yet",
   ],
 
   servicePages: [

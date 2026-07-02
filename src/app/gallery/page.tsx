@@ -15,17 +15,9 @@ import {
 } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import { siteConfig } from "@/lib/site";
 
-const phoneNumber = "(505) 372-9043";
-const phoneHref = "tel:+15053729043";
 
-const serviceAreas = [
-  "Las Cruces",
-  "Ruidoso",
-  "Roswell",
-  "Alamogordo",
-  "Nearby Areas",
-];
 
 const galleryItems = [
   {
@@ -333,7 +325,7 @@ export default function GalleryPage() {
             </p>
 
             <div className="mt-7 flex flex-wrap gap-3">
-              {serviceAreas.map((area) => (
+              {siteConfig.serviceAreas.map((area) => (
                 <span
                   key={area}
                   className="inline-flex items-center gap-2 rounded-full border border-[#f0d488]/20 bg-[#07120d]/55 px-4 py-2 text-sm font-black text-[#fff8df]"
@@ -376,11 +368,11 @@ export default function GalleryPage() {
               </Link>
 
               <a
-                href={phoneHref}
+                href={siteConfig.phoneHref}
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-[#f0d488]/25 bg-[#fff8df]/[0.08] px-7 py-4 text-base font-black text-[#fff8df] transition hover:-translate-y-0.5 hover:bg-[#fff8df]/[0.12] hover:text-[#f0d488]"
               >
                 <Phone className="h-5 w-5" />
-                Call {phoneNumber}
+                Call {siteConfig.phone}
               </a>
             </div>
           </div>

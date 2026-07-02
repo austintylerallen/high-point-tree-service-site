@@ -1,14 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Phone } from "lucide-react";
+import { siteConfig } from "@/lib/site";
 
 type SiteHeaderProps = {
   activePage?: "home" | "services" | "gallery" | "about" | "contact";
 };
-
-const phoneNumber = "(505) 372-9043";
-const phoneHref = "tel:+15053729043";
-const logoSrc = "/images/logo/high-point-tree-service-logo-v2.png";
 
 const navItems = [
   {
@@ -44,7 +41,7 @@ export default function SiteHeader({ activePage = "home" }: SiteHeaderProps) {
       <Link href="/" className="flex items-center gap-3">
         <div className="relative h-16 w-16 shrink-0 sm:h-20 sm:w-20">
           <Image
-            src={logoSrc}
+            src={siteConfig.logo}
             alt="High Point Tree Service LLC logo"
             fill
             priority
@@ -88,7 +85,7 @@ export default function SiteHeader({ activePage = "home" }: SiteHeaderProps) {
       </nav>
 
       <a
-        href={phoneHref}
+        href={siteConfig.phoneHref}
         className="hidden items-center justify-center gap-2 rounded-full bg-[#f0d488] px-5 py-3 text-sm font-black text-[#07120d] shadow-lg shadow-black/25 transition hover:-translate-y-0.5 hover:bg-[#ffe7a2] md:inline-flex"
       >
         <Phone className="h-4 w-4" />
@@ -96,7 +93,7 @@ export default function SiteHeader({ activePage = "home" }: SiteHeaderProps) {
       </a>
 
       <a
-        href={`tel:${phoneNumber}`}
+        href={siteConfig.phoneHref}
         className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#f0d488] text-[#07120d] shadow-lg shadow-black/25 md:hidden"
         aria-label="Call High Point Tree Service"
       >

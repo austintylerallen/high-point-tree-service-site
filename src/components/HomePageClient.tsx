@@ -12,18 +12,9 @@ import {
 } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import { siteConfig } from "@/lib/site";
 
-const phoneNumber = "(505) 372-9043";
-const phoneHref = "tel:+15053729043";
-const heroImageSrc = "/images/hero/tree-service-hero.png";
 
-const serviceAreas = [
-  "Las Cruces",
-  "Ruidoso",
-  "Roswell",
-  "Alamogordo",
-  "Nearby Areas",
-];
 
 const services = [
   {
@@ -78,7 +69,7 @@ export default function HomePageClient() {
   useEffect(() => {
     const interval = window.setInterval(() => {
       setActiveAreaIndex((currentIndex) =>
-        currentIndex === serviceAreas.length - 1 ? 0 : currentIndex + 1
+        currentIndex === siteConfig.serviceAreas.length - 1 ? 0 : currentIndex + 1
       );
     }, 2400);
 
@@ -135,11 +126,11 @@ export default function HomePageClient() {
                 </Link>
 
                 <a
-                  href={phoneHref}
+                  href={siteConfig.phoneHref}
                   className="inline-flex items-center justify-center gap-2 rounded-full border border-[#d7ff00]/20 bg-white/10 px-7 py-4 text-base font-black text-[#fff8df] transition hover:-translate-y-0.5 hover:bg-white/15 hover:text-[#d7ff00]"
                 >
                   <Phone className="h-5 w-5" />
-                  Call {phoneNumber}
+                  Call {siteConfig.phone}
                 </a>
               </div>
 
@@ -175,7 +166,7 @@ export default function HomePageClient() {
               <div className="relative overflow-hidden rounded-[2.25rem] border border-[#d7ff00]/15 bg-[#10251b] shadow-2xl shadow-black/40">
                 <div className="relative h-[520px]">
                   <Image
-                    src={heroImageSrc}
+                    src={siteConfig.heroImage}
                     alt="Tree service crew completing professional tree work in Southern New Mexico"
                     fill
                     priority
@@ -207,7 +198,7 @@ export default function HomePageClient() {
               </span>
 
               <span className="relative block h-[38px] min-w-[320px] overflow-hidden sm:h-[44px]">
-                {serviceAreas.map((area, index) => (
+                {siteConfig.serviceAreas.map((area, index) => (
                   <span
                     key={area}
                     className={`absolute left-0 top-1/2 -translate-y-1/2 whitespace-nowrap text-2xl font-black tracking-tight text-[#d7ff00] transition-all duration-700 sm:text-3xl ${

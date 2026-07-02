@@ -1,13 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Phone } from "lucide-react";
-
-const phoneNumber = "(505) 372-9043";
-const smsNumber = "5053729043";
-const emailAddress = "info@highpointtreeservicenm.com";
-const logoSrc = "/images/logo/high-point-tree-service-logo-v2.png";
-const phoneHref = "tel:+15053729043";
-const smsHref = "sms:+15053729043";
+import { siteConfig } from "@/lib/site";
 
 export default function SiteFooter() {
   return (
@@ -22,7 +16,7 @@ export default function SiteFooter() {
             <div className="flex items-center gap-3">
               <div className="relative h-16 w-16 sm:h-20 sm:w-20">
                 <Image
-                  src={logoSrc}
+                  src={siteConfig.logo}
                   alt="High Point Tree Service LLC logo"
                   fill
                   sizes="80px"
@@ -41,9 +35,7 @@ export default function SiteFooter() {
             </div>
 
             <p className="mt-6 max-w-2xl text-sm leading-7 text-stone-300">
-              Tree removal, trimming, pruning, stump grinding, storm cleanup,
-              and tree assessments across Las Cruces, Ruidoso, Roswell,
-              Alamogordo, and nearby areas.
+              {siteConfig.description}
             </p>
           </div>
 
@@ -74,27 +66,27 @@ export default function SiteFooter() {
 
             <div className="mt-4 grid gap-2 text-sm text-stone-300">
               <a
-                href={phoneHref}
+                href={siteConfig.phoneHref}
                 className="transition hover:text-[#f0d488]"
               >
-                {phoneNumber}
+                {siteConfig.phone}
               </a>
 
               <a
-               href={smsHref}
+                href={siteConfig.smsHref}
                 className="transition hover:text-[#f0d488]"
               >
                 Text photos
               </a>
 
               <a
-                href={`mailto:${emailAddress}`}
+                href={`mailto:${siteConfig.email}`}
                 className="break-all transition hover:text-[#f0d488]"
               >
-                {emailAddress}
+                {siteConfig.email}
               </a>
 
-              <p className="text-stone-400">highpointtreeservicenm.com</p>
+              <p className="text-stone-400">{siteConfig.domainLabel}</p>
             </div>
           </div>
         </div>
@@ -107,7 +99,7 @@ export default function SiteFooter() {
 
       <div className="fixed bottom-0 left-0 right-0 z-50 grid grid-cols-2 border-t border-[#f0d488]/15 bg-[#07120d]/95 p-3 shadow-2xl backdrop-blur-xl md:hidden">
         <a
-         href={phoneHref}
+          href={siteConfig.phoneHref}
           className="mr-2 inline-flex items-center justify-center gap-2 rounded-xl bg-[#f0d488] px-4 py-3 text-sm font-black text-[#07120d]"
         >
           <Phone className="h-4 w-4" />

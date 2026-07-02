@@ -12,26 +12,10 @@ import {
 } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import { siteConfig } from "@/lib/site";
 
-const phoneNumber = "(505) 372-9043";
-const phoneHref = "tel:+15053729043";
 
-const serviceAreas = [
-  "Las Cruces",
-  "Ruidoso",
-  "Roswell",
-  "Alamogordo",
-  "Nearby Areas",
-];
 
-const services = [
-  "Tree removal",
-  "Tree trimming and pruning",
-  "Stump grinding",
-  "Storm damage cleanup",
-  "Tree assessments",
-  "Property cleanup",
-];
 
 const commitments = [
   {
@@ -117,7 +101,7 @@ export default function AboutPage() {
               </Link>
 
               <a
-                href={phoneHref}
+                href={siteConfig.phoneHref}
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-[#f0d488]/25 bg-[#fff8df]/[0.08] px-6 py-3 text-sm font-black uppercase tracking-[0.14em] text-[#fff8df] transition hover:-translate-y-0.5 hover:bg-[#fff8df]/[0.12] hover:text-[#f0d488]"
               >
                 <Phone className="h-4 w-4" />
@@ -199,7 +183,7 @@ export default function AboutPage() {
           </div>
 
           <div className="grid gap-px overflow-hidden rounded-[2rem] border border-[#f0d488]/18 bg-[#f0d488]/18 shadow-2xl shadow-black/25 sm:grid-cols-2">
-            {services.map((service) => (
+            {siteConfig.services.map((service) => (
               <div key={service} className="bg-[#07120d]/90 p-6">
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-[#f0d488]" />
@@ -234,7 +218,7 @@ export default function AboutPage() {
             </p>
 
             <div className="mt-7 flex flex-wrap gap-3">
-              {serviceAreas.map((area) => (
+              {siteConfig.serviceAreas.map((area) => (
                 <span
                   key={area}
                   className="inline-flex items-center gap-2 rounded-full border border-[#f0d488]/20 bg-[#07120d]/55 px-4 py-2 text-sm font-black text-[#fff8df]"

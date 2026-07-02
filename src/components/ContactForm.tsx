@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { AlertCircle, ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
+import { siteConfig } from "@/lib/site";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
@@ -25,15 +26,6 @@ const initialFormData: FormDataState = {
   company: "",
 };
 
-const serviceOptions = [
-  "Tree removal",
-  "Tree trimming and pruning",
-  "Stump grinding",
-  "Storm damage cleanup",
-  "Tree assessment",
-  "Property cleanup",
-  "Not sure yet",
-];
 
 export default function ContactForm() {
   const [formData, setFormData] = useState<FormDataState>(initialFormData);
@@ -185,7 +177,7 @@ export default function ContactForm() {
               className="mt-3 w-full rounded-2xl border border-[#f0d488]/18 bg-[#10251b] px-5 py-4 text-[#fff8df] outline-none transition focus:border-[#f0d488]"
             >
               <option value="">Select a service</option>
-              {serviceOptions.map((service) => (
+              {siteConfig.quoteServiceOptions.map((service) => (
                 <option key={service} value={service}>
                   {service}
                 </option>

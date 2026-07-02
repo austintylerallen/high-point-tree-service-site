@@ -11,28 +11,18 @@ import {
 } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import { siteConfig } from "@/lib/site";
 import ContactForm from "@/components/ContactForm";
 
-const phoneNumber = "(505) 372-9043";
-const phoneHref = "tel:+15053729043";
-const smsHref = "sms:+15053729043";
-const emailAddress = "info@highpointtreeservicenm.com";
 
-const serviceAreas = [
-  "Las Cruces",
-  "Ruidoso",
-  "Roswell",
-  "Alamogordo",
-  "Nearby Areas",
-];
 
 const contactMethods = [
   {
     label: "Call",
-    title: phoneNumber,
+    title: siteConfig.phone,
     description:
       "Best for urgent tree concerns, storm damage, blocked access, or fast answers.",
-    href: phoneHref,
+    href: siteConfig.phoneHref,
     icon: Phone,
   },
   {
@@ -40,15 +30,15 @@ const contactMethods = [
     title: "Send photos by text",
     description:
       "Helpful for tree damage, access issues, stumps, cleanup needs, and quick property details.",
-    href: smsHref,
+    href: siteConfig.smsHref,
     icon: MessageSquare,
   },
   {
     label: "Email",
-    title: emailAddress,
+    title: siteConfig.email,
     description:
       "Good for non-urgent project details, quote follow-ups, and additional information.",
-    href: `mailto:${emailAddress}`,
+    href: `mailto:${siteConfig.email}`,
     icon: Mail,
   },
 ];
@@ -219,7 +209,7 @@ export default function ContactPage() {
 
           <div>
             <div className="flex flex-wrap gap-3">
-              {serviceAreas.map((area) => (
+              {siteConfig.serviceAreas.map((area) => (
                 <span
                   key={area}
                   className="inline-flex items-center gap-2 rounded-full border border-[#f0d488]/18 bg-[#fff8df]/[0.07] px-5 py-3 text-sm font-black text-[#fff8df]"
