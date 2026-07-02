@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import {
   AlertTriangle,
@@ -17,23 +16,19 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { siteConfig } from "@/lib/site";
 
-
-
-const galleryItems = [
+const workItems = [
   {
     title: "Tree Removal",
     location: "Southern New Mexico",
     description:
-      "Removal work for dead, damaged, leaning, crowded, or unwanted trees that need careful planning around the property.",
-    image: null as string | null,
+      "Removal support for dead, damaged, leaning, crowded, or unwanted trees that need careful planning around nearby structures, fences, driveways, and outdoor spaces.",
     icon: TreePine,
   },
   {
     title: "Tree Trimming & Pruning",
     location: "Southern New Mexico",
     description:
-      "Trimming and pruning for overgrown limbs, roof clearance, walkways, fences, visibility, shaping, and routine maintenance.",
-    image: null as string | null,
+      "Trimming and pruning for overgrown limbs, roof clearance, walkways, fences, visibility, shaping, and routine tree maintenance.",
     icon: ClipboardCheck,
   },
   {
@@ -41,7 +36,6 @@ const galleryItems = [
     location: "Southern New Mexico",
     description:
       "Cleanup for fallen limbs, broken branches, blocked access, and tree debris after wind, storms, and rough New Mexico weather.",
-    image: null as string | null,
     icon: AlertTriangle,
   },
   {
@@ -49,7 +43,6 @@ const galleryItems = [
     location: "Southern New Mexico",
     description:
       "Grinding and cleanup for old or freshly cut stumps that make a yard harder to mow, use, maintain, or landscape.",
-    image: null as string | null,
     icon: Wrench,
   },
   {
@@ -57,24 +50,22 @@ const galleryItems = [
     location: "Southern New Mexico",
     description:
       "Brush, limbs, tree debris, and cleanup support after removals, trimming, storm damage, or neglected outdoor areas.",
-    image: null as string | null,
     icon: Truck,
   },
   {
     title: "Tree Assessments",
     location: "Southern New Mexico",
     description:
-      "Property walkthroughs to help determine whether a tree needs removal, trimming, cleanup, monitoring, or another next step.",
-    image: null as string | null,
+      "Property walkthroughs to help determine whether a tree needs removal, trimming, cleanup, grinding, monitoring, or another next step.",
     icon: ShieldCheck,
   },
 ];
 
 const workPriorities = [
   {
-    title: "Safety around the property",
+    title: "Property safety",
     description:
-      "Tree work is planned around nearby homes, fences, driveways, landscaping, access points, and the areas people use every day.",
+      "Tree work is planned around homes, fences, driveways, landscaping, access points, and the spaces people use every day.",
   },
   {
     title: "Cleaner outdoor spaces",
@@ -88,7 +79,7 @@ const workPriorities = [
   },
 ];
 
-const serviceProofPoints = [
+const commonRequests = [
   "Dead, damaged, or unwanted tree removal",
   "Overgrown limb trimming and pruning",
   "Stump grinding and yard cleanup",
@@ -98,14 +89,14 @@ const serviceProofPoints = [
 ];
 
 export const metadata: Metadata = {
-  title: "Tree Service Work Examples | High Point Tree Service LLC",
+  title: "Tree Service Work Guide | High Point Tree Service LLC",
   description:
-    "Explore High Point Tree Service LLC work examples for tree removal, trimming, pruning, stump grinding, storm damage cleanup, tree assessments, and property cleanup across Southern New Mexico.",
+    "Learn how High Point Tree Service LLC helps with tree removal, trimming, pruning, stump grinding, storm damage cleanup, tree assessments, and property cleanup across Southern New Mexico.",
   alternates: {
     canonical: "/gallery",
   },
   openGraph: {
-    title: "Tree Service Work Examples | High Point Tree Service LLC",
+    title: "Tree Service Work Guide | High Point Tree Service LLC",
     description:
       "Tree removal, trimming, pruning, stump grinding, storm damage cleanup, tree assessments, and property cleanup across Southern New Mexico.",
     url: "/gallery",
@@ -131,7 +122,7 @@ export default function GalleryPage() {
         <div className="relative mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
           <div>
             <p className="text-sm font-black uppercase tracking-[0.26em] text-[#f0d488]">
-              Work Examples
+              Work Guide
             </p>
 
             <h1 className="mt-4 max-w-4xl font-serif text-5xl font-black leading-[0.96] tracking-tight text-[#fff8df] sm:text-6xl lg:text-7xl">
@@ -141,14 +132,15 @@ export default function GalleryPage() {
 
           <div className="rounded-[2rem] border border-[#f0d488]/18 bg-[#07120d]/60 p-6 shadow-2xl shadow-black/25 backdrop-blur-xl sm:p-8">
             <p className="text-lg leading-8 text-[#d8d1bf]">
-              High Point Tree Service helps property owners with tree removal,
-              trimming, pruning, stump grinding, storm damage cleanup, tree
-              assessments, and property cleanup across Southern New Mexico.
+              High Point Tree Service helps property owners choose the right
+              next step for tree removal, trimming, pruning, stump grinding,
+              storm damage cleanup, tree assessments, and property cleanup.
             </p>
 
             <p className="mt-5 text-sm leading-7 text-[#fff8df]/70">
-              Each service is handled with attention to safety, access, property
-              protection, and the finished condition of the outdoor space.
+              Real project photos can be added here later. For now, this page
+              explains the types of work customers can request without making
+              the site look like it has missing gallery images.
             </p>
           </div>
         </div>
@@ -178,34 +170,22 @@ export default function GalleryPage() {
           </div>
 
           <div className="mt-14 grid gap-px overflow-hidden rounded-[2.4rem] border border-[#f0d488]/18 bg-[#f0d488]/18 shadow-2xl shadow-black/25 md:grid-cols-2 lg:grid-cols-3">
-            {galleryItems.map((item) => {
+            {workItems.map((item) => {
               const Icon = item.icon;
 
               return (
                 <article
                   key={item.title}
-                  className="group relative min-h-[360px] overflow-hidden bg-[#07120d]"
+                  className="group relative overflow-hidden bg-[#07120d] p-7"
                 >
-                  {item.image ? (
-                    <Image
-                      src={item.image}
-                      alt={`${item.title} work by High Point Tree Service in ${item.location}`}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover transition duration-700 group-hover:scale-105"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(240,212,136,0.16),transparent_30%),radial-gradient(circle_at_80%_80%,rgba(32,63,41,0.9),transparent_40%),linear-gradient(135deg,#07120d,#183722)]" />
-                  )}
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(240,212,136,0.13),transparent_32%),radial-gradient(circle_at_80%_80%,rgba(32,63,41,0.65),transparent_42%),linear-gradient(135deg,#07120d,#10251b)] opacity-90 transition duration-500 group-hover:opacity-100" />
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#07120d] via-[#07120d]/50 to-transparent" />
+                  <div className="relative">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-[#f0d488]/20 bg-[#07120d]/70 text-[#f0d488]">
+                      <Icon className="h-7 w-7" />
+                    </div>
 
-                  <div className="absolute left-5 top-5 flex h-12 w-12 items-center justify-center rounded-2xl border border-[#f0d488]/20 bg-[#07120d]/70 text-[#f0d488] backdrop-blur">
-                    <Icon className="h-6 w-6" />
-                  </div>
-
-                  <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <p className="text-xs font-black uppercase tracking-[0.2em] text-[#f0d488]">
+                    <p className="mt-8 text-xs font-black uppercase tracking-[0.2em] text-[#f0d488]">
                       {item.location}
                     </p>
 
@@ -213,7 +193,7 @@ export default function GalleryPage() {
                       {item.title}
                     </h3>
 
-                    <p className="mt-3 text-sm leading-6 text-[#d8d1bf]">
+                    <p className="mt-4 text-sm leading-7 text-[#d8d1bf]">
                       {item.description}
                     </p>
                   </div>
@@ -239,8 +219,8 @@ export default function GalleryPage() {
 
             <p className="mt-5 max-w-xl text-lg leading-8 text-[#d8d1bf]">
               Tree work affects more than the tree itself. High Point plans each
-              job around the surrounding property, the cleanup needs, and the
-              reason the customer requested help in the first place.
+              job around the surrounding property, cleanup needs, and the reason
+              the customer requested help in the first place.
             </p>
           </div>
 
@@ -283,14 +263,14 @@ export default function GalleryPage() {
             </h2>
 
             <p className="mt-5 max-w-xl text-lg leading-8 text-[#d8d1bf]">
-              Customers often reach out when a tree looks unsafe, limbs are
-              getting too close to structures, storm debris is blocking access,
-              or a stump is making the property harder to maintain.
+              Customers often reach out when a tree looks unsafe, limbs are too
+              close to structures, storm debris is blocking access, or a stump
+              is making the property harder to maintain.
             </p>
           </div>
 
           <div className="grid gap-px overflow-hidden rounded-[2rem] border border-[#f0d488]/18 bg-[#f0d488]/18 shadow-2xl shadow-black/25 sm:grid-cols-2">
-            {serviceProofPoints.map((item) => (
+            {commonRequests.map((item) => (
               <div key={item} className="bg-[#07120d]/90 p-6">
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-[#f0d488]" />
@@ -318,10 +298,9 @@ export default function GalleryPage() {
 
           <div>
             <p className="text-lg leading-8 text-[#d8d1bf]">
-              High Point Tree Service serves Las Cruces, Ruidoso, Roswell,
-              Alamogordo, and nearby areas. Customers can send the property
-              location to confirm availability and request the right tree
-              service for the job.
+              High Point Tree Service serves {siteConfig.serviceAreaLabel}.
+              Customers can send the property location to confirm availability
+              and request the right tree service for the job.
             </p>
 
             <div className="mt-7 flex flex-wrap gap-3">
