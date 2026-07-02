@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Phone } from "lucide-react";
 import { siteConfig } from "@/lib/site";
+import { servicePages } from "@/lib/services";
+import { serviceAreaPages } from "@/lib/serviceAreas";
 
 export default function SiteFooter() {
   return (
@@ -11,7 +13,7 @@ export default function SiteFooter() {
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#f0d488]/50 to-transparent" />
 
       <div className="relative mx-auto max-w-7xl">
-        <div className="grid gap-12 border-b border-[#f0d488]/15 pb-12 lg:grid-cols-[1.3fr_0.7fr_0.7fr]">
+        <div className="grid gap-12 border-b border-[#f0d488]/15 pb-12 lg:grid-cols-[1.25fr_0.75fr_0.75fr_0.75fr]">
           <div>
             <div className="flex items-center gap-3">
               <div className="relative h-16 w-16 sm:h-20 sm:w-20">
@@ -37,12 +39,8 @@ export default function SiteFooter() {
             <p className="mt-6 max-w-2xl text-sm leading-7 text-stone-300">
               {siteConfig.description}
             </p>
-          </div>
 
-          <div>
-            <p className="font-black text-[#fff8df]">Pages</p>
-
-            <div className="mt-4 grid gap-2 text-sm text-stone-300">
+            <div className="mt-6 grid gap-2 text-sm text-stone-300">
               <Link href="/" className="transition hover:text-[#f0d488]">
                 Home
               </Link>
@@ -50,7 +48,7 @@ export default function SiteFooter() {
                 Services
               </Link>
               <Link href="/gallery" className="transition hover:text-[#f0d488]">
-                Gallery
+                Work Guide
               </Link>
               <Link href="/about" className="transition hover:text-[#f0d488]">
                 About
@@ -58,6 +56,38 @@ export default function SiteFooter() {
               <Link href="/contact" className="transition hover:text-[#f0d488]">
                 Contact
               </Link>
+            </div>
+          </div>
+
+          <div>
+            <p className="font-black text-[#fff8df]">Services</p>
+
+            <div className="mt-4 grid gap-2 text-sm text-stone-300">
+              {servicePages.map((service) => (
+                <Link
+                  key={service.slug}
+                  href={`/services/${service.slug}`}
+                  className="transition hover:text-[#f0d488]"
+                >
+                  {service.navLabel}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <p className="font-black text-[#fff8df]">Service Areas</p>
+
+            <div className="mt-4 grid gap-2 text-sm text-stone-300">
+              {serviceAreaPages.map((area) => (
+                <Link
+                  key={area.slug}
+                  href={`/service-areas/${area.slug}`}
+                  className="transition hover:text-[#f0d488]"
+                >
+                  {area.label}
+                </Link>
+              ))}
             </div>
           </div>
 
