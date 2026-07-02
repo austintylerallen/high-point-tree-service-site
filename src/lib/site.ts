@@ -86,27 +86,27 @@ export const siteConfig = {
   servicePages: [
     {
       name: "Tree removal",
-      url: "/services#tree-removal",
+      url: "/services/tree-removal",
     },
     {
       name: "Tree trimming and pruning",
-      url: "/services#tree-trimming-pruning",
+      url: "/services/tree-trimming-pruning",
     },
     {
       name: "Stump grinding",
-      url: "/services#stump-grinding",
+      url: "/services/stump-grinding",
     },
     {
       name: "Storm damage cleanup",
-      url: "/services#storm-damage-cleanup",
+      url: "/services/storm-damage-cleanup",
     },
     {
       name: "Tree assessments",
-      url: "/services#tree-assessments",
+      url: "/services/tree-assessments",
     },
     {
       name: "Property cleanup",
-      url: "/services#property-cleanup",
+      url: "/services/property-cleanup",
     },
   ],
 

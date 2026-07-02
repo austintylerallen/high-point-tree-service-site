@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site";
+import { servicePages } from "@/lib/services";
 
 type SitemapRoute = {
   path: string;
@@ -7,7 +8,7 @@ type SitemapRoute = {
   changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
 };
 
-const routes: SitemapRoute[] = [
+const staticRoutes: SitemapRoute[] = [
   {
     path: "",
     priority: 1,
@@ -38,7 +39,13 @@ const routes: SitemapRoute[] = [
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
 
-  return routes.map((route) => ({
+  const serviceRoutes: SitemapRoute[] = servicePages.map((service) => ({
+    path: `/services/${service.slug}`,
+    priority: 0.85,
+    changeFrequency: "monthly",
+  }));
+
+  return [...staticRoutes, ...serviceRoutes].map((route) => ({
     url: `${siteConfig.url}${route.path}`,
     lastModified,
     changeFrequency: route.changeFrequency,

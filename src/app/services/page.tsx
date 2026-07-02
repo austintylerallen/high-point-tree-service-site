@@ -8,13 +8,12 @@ import {
   MapPin,
   Phone,
   ShieldCheck,
-  TreePine,
-  Truck,
   Wrench,
 } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { siteConfig } from "@/lib/site";
+import { servicePages } from "@/lib/services";
 
 
 
@@ -76,104 +75,7 @@ const problemGuides = [
   },
 ];
 
-const services = [
-  {
-    title: "Tree Removal",
-    slug: "tree-removal",
-    eyebrow: "Hazardous, dead, leaning, or unwanted trees",
-    body:
-      "Tree removal is for trees that are dead, damaged, leaning, crowded, storm-affected, or no longer safe for the property. The work should be planned around nearby homes, fences, driveways, utilities, landscaping, and access points.",
-    outcome:
-      "A safer property with the problem tree removed and the surrounding area protected as much as possible.",
-    signs: [
-      "Dead or visibly declining tree",
-      "Leaning trunk or splitting wood",
-      "Large limbs over structures",
-      "Storm damage or instability",
-    ],
-    icon: TreePine,
-  },
-  {
-    title: "Tree Trimming & Pruning",
-    slug: "tree-trimming-pruning",
-    eyebrow: "Clearance, overgrowth, shaping, and maintenance",
-    body:
-      "Tree trimming and pruning help clean up overgrowth, improve clearance, remove weak branches, and make the property easier to maintain. This is often the right choice when branches are near roofs, driveways, fences, sidewalks, or high-use areas.",
-    outcome:
-      "Cleaner growth, better clearance, fewer nuisance branches, and a more controlled-looking property.",
-    signs: [
-      "Branches touching the roof",
-      "Limbs blocking visibility or access",
-      "Overgrown or uneven canopy",
-      "Dead branches visible overhead",
-    ],
-    icon: ClipboardCheck,
-  },
-  {
-    title: "Stump Grinding",
-    slug: "stump-grinding",
-    eyebrow: "Old stumps, fresh removals, and usable yard space",
-    body:
-      "Stump grinding removes old or freshly cut stumps so the yard is safer, cleaner, and easier to use. It is helpful when a stump creates a tripping hazard, makes mowing difficult, attracts pests, or leaves the property looking unfinished.",
-    outcome:
-      "A cleaner yard with fewer obstructions, fewer trip hazards, and more usable outdoor space.",
-    signs: [
-      "Old stump taking up space",
-      "Fresh removal left a stump behind",
-      "Trip hazard in the yard",
-      "Hard to mow or landscape around it",
-    ],
-    icon: Wrench,
-  },
-  {
-    title: "Storm Damage Cleanup",
-    slug: "storm-damage-cleanup",
-    eyebrow: "Fallen limbs, broken branches, and urgent debris",
-    body:
-      "Storm damage cleanup helps clear fallen limbs, broken branches, blocked access, and scattered tree debris after rough weather. The goal is to make the property safer, cleaner, and usable again.",
-    outcome:
-      "Tree debris cleared, access restored, and the property brought back under control after wind or storm damage.",
-    signs: [
-      "Branches came down after wind",
-      "Access is blocked",
-      "Tree debris across the property",
-      "Damage needs to be handled quickly",
-    ],
-    icon: AlertTriangle,
-  },
-  {
-    title: "Tree Assessments",
-    slug: "tree-assessments",
-    eyebrow: "Risk checks and practical next-step guidance",
-    body:
-      "Tree assessments help property owners understand whether a tree needs trimming, removal, cleanup, or monitoring. This is useful when a tree looks questionable or when dead limbs, leaning, splitting, or storm damage create concern.",
-    outcome:
-      "A clearer understanding of what the tree needs and what the next step should be.",
-    signs: [
-      "Not sure if a tree is safe",
-      "Dead limbs or weak branches",
-      "Tree appears to be leaning",
-      "Need help deciding next steps",
-    ],
-    icon: ShieldCheck,
-  },
-  {
-    title: "Property Cleanup",
-    slug: "property-cleanup",
-    eyebrow: "Brush, limbs, debris, and cleaner outdoor spaces",
-    body:
-      "Property cleanup removes brush, limbs, tree debris, and leftover mess from trimming, removals, storms, or neglected outdoor areas. It helps the property feel finished and easier to maintain.",
-    outcome:
-      "A cleaner property with less debris, better access, and a more finished appearance.",
-    signs: [
-      "Brush piles or tree debris",
-      "Storm mess left behind",
-      "Final cleanup after tree work",
-      "Outdoor areas hard to access",
-    ],
-    icon: Truck,
-  },
-];
+const services = servicePages;
 
 export const metadata: Metadata = {
   title: "Tree Services in Southern New Mexico | High Point Tree Service LLC",
@@ -368,6 +270,14 @@ export default function ServicesPage() {
                       <p className="mt-2 leading-7 text-[#fff8df]">
                         {service.outcome}
                       </p>
+
+                      <Link
+                        href={`/services/${service.slug}`}
+                        className="mt-5 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.14em] text-[#f0d488] transition hover:text-[#fff8df]"
+                      >
+                        Learn more about {service.shortTitle}
+                        <ArrowRight className="h-4 w-4" />
+                      </Link>
                     </div>
                   </div>
 
