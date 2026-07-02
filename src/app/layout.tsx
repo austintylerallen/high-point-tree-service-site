@@ -19,22 +19,6 @@ export const metadata: Metadata = {
   publisher: "High Point Tree Service LLC",
   category: "Tree Service",
 
-  keywords: [
-    "High Point Tree Service",
-    "High Point Tree Service LLC",
-    "tree service Southern New Mexico",
-    "tree service Las Cruces",
-    "tree service Ruidoso",
-    "tree service Roswell",
-    "tree service Alamogordo",
-    "tree removal",
-    "tree trimming",
-    "tree pruning",
-    "stump grinding",
-    "storm damage cleanup",
-    "tree assessments",
-    "property cleanup",
-  ],
 
   openGraph: {
     type: "website",
