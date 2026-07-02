@@ -1,14 +1,20 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-type QuoteRequestBody = {
-  name?: string;
-  phone?: string;
-  email?: string;
-  service?: string;
-  location?: string;
-  message?: string;
-  company?: string;
+type QuoteFieldValues = {
+  name: string;
+  phone: string;
+  email: string;
+  service: string;
+  location: string;
+  message: string;
+  company: string;
+};
+
+type EmailAttachment = {
+  filename: string;
+  content: Buffer;
+  contentType: string;
 };
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -20,8 +26,24 @@ const fromEmail =
   process.env.QUOTE_FROM_EMAIL ||
   "High Point Tree Service <quotes@highpointtreeservicenm.com>";
 
-function cleanValue(value?: string) {
-  return value?.trim().slice(0, 2000) || "";
+const maxPhotoCount = 3;
+const maxPhotoSizeMb = 3;
+const maxPhotoSizeBytes = maxPhotoSizeMb * 1024 * 1024;
+
+const allowedPhotoTypes = [
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "image/heic",
+  "image/heif",
+];
+
+function cleanValue(value: FormDataEntryValue | null) {
+  if (typeof value !== "string") {
+    return "";
+  }
+
+  return value.trim().slice(0, 2000);
 }
 
 function escapeHtml(value: string) {
@@ -48,14 +70,7 @@ function getTextFallback({
   service,
   location,
   message,
-}: {
-  name: string;
-  phone: string;
-  email: string;
-  service: string;
-  location: string;
-  message: string;
-}) {
+}: QuoteFieldValues) {
   return `
 New Tree Service Quote Request
 
@@ -72,6 +87,54 @@ Reply to this lead as soon as possible.
   `.trim();
 }
 
+function getFileExtension(file: File) {
+  const nameParts = file.name.split(".");
+  const extension = nameParts.length > 1 ? nameParts.pop() : "";
+
+  if (extension) {
+    return extension.toLowerCase().replace(/[^a-z0-9]/g, "");
+  }
+
+  if (file.type === "image/jpeg") {
+    return "jpg";
+  }
+
+  if (file.type === "image/png") {
+    return "png";
+  }
+
+  if (file.type === "image/webp") {
+    return "webp";
+  }
+
+  if (file.type === "image/heic") {
+    return "heic";
+  }
+
+  if (file.type === "image/heif") {
+    return "heif";
+  }
+
+  return "jpg";
+}
+
+async function buildPhotoAttachments(files: File[]) {
+  const attachments: EmailAttachment[] = [];
+
+  for (const [index, file] of files.entries()) {
+    const arrayBuffer = await file.arrayBuffer();
+    const extension = getFileExtension(file);
+
+    attachments.push({
+      filename: `quote-photo-${index + 1}.${extension}`,
+      content: Buffer.from(arrayBuffer),
+      contentType: file.type,
+    });
+  }
+
+  return attachments;
+}
+
 export async function POST(request: Request) {
   try {
     if (!process.env.RESEND_API_KEY) {
@@ -86,15 +149,15 @@ export async function POST(request: Request) {
       );
     }
 
-    const body = (await request.json()) as QuoteRequestBody;
+    const formData = await request.formData();
 
-    const name = cleanValue(body.name);
-    const phone = cleanValue(body.phone);
-    const email = cleanValue(body.email);
-    const service = cleanValue(body.service);
-    const location = cleanValue(body.location);
-    const message = cleanValue(body.message);
-    const company = cleanValue(body.company);
+    const name = cleanValue(formData.get("name"));
+    const phone = cleanValue(formData.get("phone"));
+    const email = cleanValue(formData.get("email"));
+    const service = cleanValue(formData.get("service"));
+    const location = cleanValue(formData.get("location"));
+    const message = cleanValue(formData.get("message"));
+    const company = cleanValue(formData.get("company"));
 
     if (company) {
       return NextResponse.json({
@@ -123,12 +186,59 @@ export async function POST(request: Request) {
       );
     }
 
+    const photoFiles = formData
+      .getAll("photos")
+      .filter((entry): entry is File => entry instanceof File && entry.size > 0);
+
+    if (photoFiles.length > maxPhotoCount) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: `Please upload no more than ${maxPhotoCount} photos.`,
+        },
+        { status: 400 }
+      );
+    }
+
+    const invalidPhoto = photoFiles.find(
+      (file) => !allowedPhotoTypes.includes(file.type)
+    );
+
+    if (invalidPhoto) {
+      return NextResponse.json(
+        {
+          success: false,
+          message:
+            "Please upload JPG, PNG, WEBP, HEIC, or HEIF image files only.",
+        },
+        { status: 400 }
+      );
+    }
+
+    const oversizedPhoto = photoFiles.find(
+      (file) => file.size > maxPhotoSizeBytes
+    );
+
+    if (oversizedPhoto) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: `Each photo must be ${maxPhotoSizeMb} MB or smaller.`,
+        },
+        { status: 400 }
+      );
+    }
+
     const safeName = escapeHtml(name);
     const safePhone = escapeHtml(phone);
     const safeEmail = email ? escapeHtml(email) : "Not provided";
     const safeService = escapeHtml(service);
     const safeLocation = escapeHtml(location);
     const safeMessage = formatMultiline(message);
+    const photoCountText =
+      photoFiles.length > 0
+        ? `${photoFiles.length} photo${photoFiles.length === 1 ? "" : "s"} attached`
+        : "No photos attached";
 
     const subject = `New ${service} Quote Request - ${name}`;
 
@@ -146,6 +256,7 @@ export async function POST(request: Request) {
           <p><strong>Email:</strong> ${safeEmail}</p>
           <p><strong>Service Needed:</strong> ${safeService}</p>
           <p><strong>Property Location:</strong> ${safeLocation}</p>
+          <p><strong>Photos:</strong> ${photoCountText}</p>
 
           <p style="margin-bottom: 6px;"><strong>Job Details:</strong></p>
           <p style="margin-top: 0;">${safeMessage}</p>
@@ -157,14 +268,21 @@ export async function POST(request: Request) {
       </div>
     `;
 
-    const text = getTextFallback({
-      name,
-      phone,
-      email,
-      service,
-      location,
-      message,
-    });
+    const text = `
+${getTextFallback({
+  name,
+  phone,
+  email,
+  service,
+  location,
+  message,
+  company,
+})}
+
+Photos: ${photoCountText}
+    `.trim();
+
+    const attachments = await buildPhotoAttachments(photoFiles);
 
     const { error } = await resend.emails.send({
       from: fromEmail,
@@ -173,6 +291,7 @@ export async function POST(request: Request) {
       subject,
       html: emailHtml,
       text,
+      attachments,
     });
 
     if (error) {

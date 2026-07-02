@@ -1,7 +1,14 @@
 "use client";
 
-import { FormEvent, useState } from "react";
-import { AlertCircle, ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
+import { ChangeEvent, FormEvent, useState } from "react";
+import {
+  AlertCircle,
+  ArrowRight,
+  CheckCircle2,
+  ImagePlus,
+  Loader2,
+  X,
+} from "lucide-react";
 import { siteConfig } from "@/lib/site";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
@@ -26,9 +33,28 @@ const initialFormData: FormDataState = {
   company: "",
 };
 
+const maxPhotoCount = 5;
+const maxPhotoSizeMb = 10;
+const maxPhotoSizeBytes = maxPhotoSizeMb * 1024 * 1024;
+const maxTotalPhotoSizeMb = 24;
+const maxTotalPhotoSizeBytes = maxTotalPhotoSizeMb * 1024 * 1024;
+
+const allowedPhotoTypes = [
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "image/heic",
+  "image/heif",
+];
+
+function formatFileSize(size: number) {
+  const sizeInMb = size / 1024 / 1024;
+  return `${sizeInMb.toFixed(1)} MB`;
+}
 
 export default function ContactForm() {
   const [formData, setFormData] = useState<FormDataState>(initialFormData);
+  const [photos, setPhotos] = useState<File[]>([]);
   const [status, setStatus] = useState<FormStatus>("idle");
   const [responseMessage, setResponseMessage] = useState("");
 
@@ -39,6 +65,78 @@ export default function ContactForm() {
     }));
   }
 
+  function handlePhotoChange(event: ChangeEvent<HTMLInputElement>) {
+    const selectedFiles = Array.from(event.target.files || []);
+
+    if (selectedFiles.length === 0) {
+      return;
+    }
+
+    const combinedFiles = [...photos, ...selectedFiles];
+
+    if (combinedFiles.length > maxPhotoCount) {
+      setStatus("error");
+      setResponseMessage(`Please upload no more than ${maxPhotoCount} photos.`);
+      event.target.value = "";
+      return;
+    }
+
+    const invalidTypeFile = selectedFiles.find(
+      (file) => !allowedPhotoTypes.includes(file.type)
+    );
+
+    if (invalidTypeFile) {
+      setStatus("error");
+      setResponseMessage(
+        "Please upload JPG, PNG, WEBP, HEIC, or HEIF image files only."
+      );
+      event.target.value = "";
+      return;
+    }
+
+    const oversizedFile = selectedFiles.find(
+      (file) => file.size > maxPhotoSizeBytes
+    );
+
+    if (oversizedFile) {
+      setStatus("error");
+      setResponseMessage(
+        `Each photo must be ${maxPhotoSizeMb} MB or smaller. "${oversizedFile.name}" is ${formatFileSize(
+          oversizedFile.size
+        )}.`
+      );
+      event.target.value = "";
+      return;
+    }
+
+    const totalPhotoSize = combinedFiles.reduce(
+      (total, file) => total + file.size,
+      0
+    );
+
+    if (totalPhotoSize > maxTotalPhotoSizeBytes) {
+      setStatus("error");
+      setResponseMessage(
+        `Please keep the total photo upload under ${maxTotalPhotoSizeMb} MB. The selected photos total ${formatFileSize(
+          totalPhotoSize
+        )}.`
+      );
+      event.target.value = "";
+      return;
+    }
+
+    setPhotos(combinedFiles);
+    setStatus("idle");
+    setResponseMessage("");
+    event.target.value = "";
+  }
+
+  function removePhoto(indexToRemove: number) {
+    setPhotos((currentPhotos) =>
+      currentPhotos.filter((_, index) => index !== indexToRemove)
+    );
+  }
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -46,12 +144,23 @@ export default function ContactForm() {
     setResponseMessage("");
 
     try {
+      const requestBody = new FormData();
+
+      requestBody.append("name", formData.name);
+      requestBody.append("phone", formData.phone);
+      requestBody.append("email", formData.email);
+      requestBody.append("service", formData.service);
+      requestBody.append("location", formData.location);
+      requestBody.append("message", formData.message);
+      requestBody.append("company", formData.company);
+
+      photos.forEach((photo) => {
+        requestBody.append("photos", photo);
+      });
+
       const response = await fetch("/api/quote", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+        body: requestBody,
       });
 
       const result = (await response.json()) as {
@@ -73,6 +182,7 @@ export default function ContactForm() {
           "Your quote request was sent successfully. High Point Tree Service will follow up soon."
       );
       setFormData(initialFormData);
+      setPhotos([]);
     } catch (error) {
       console.error("Contact form error:", error);
       setStatus("error");
@@ -226,14 +336,68 @@ export default function ContactForm() {
         </div>
 
         <div className="rounded-2xl border border-[#f0d488]/14 bg-[#fff8df]/[0.05] p-5">
-          <div className="flex items-start gap-3">
-            <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#f0d488]" />
-            <p className="text-sm leading-6 text-[#fff8df]/70">
-              Photos can help with tree damage, stumps, access issues, and
-              cleanup needs. After submitting the form, you can also text photos
-              to High Point if needed.
-            </p>
-          </div>
+          <label
+            htmlFor="photos"
+            className="flex cursor-pointer flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"
+          >
+            <div className="flex items-start gap-3">
+              <ImagePlus className="mt-0.5 h-5 w-5 shrink-0 text-[#f0d488]" />
+              <div>
+                <p className="text-sm font-black uppercase tracking-[0.18em] text-[#f0d488]">
+                  Upload Photos
+                </p>
+                <p className="mt-2 text-sm leading-6 text-[#fff8df]/70">
+                  Add up to {maxPhotoCount} photos of the tree, stump, storm
+                  damage, access area, or cleanup need. Each photo can be up
+                  to {maxPhotoSizeMb} MB, with a total upload limit of{" "}
+                  {maxTotalPhotoSizeMb} MB.
+                </p>
+              </div>
+            </div>
+
+            <span className="inline-flex items-center justify-center rounded-full border border-[#f0d488]/25 bg-[#fff8df]/[0.08] px-5 py-3 text-sm font-black text-[#fff8df] transition hover:bg-[#fff8df]/[0.12] hover:text-[#f0d488]">
+              Choose Photos
+            </span>
+          </label>
+
+          <input
+            id="photos"
+            name="photos"
+            type="file"
+            accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
+            multiple
+            onChange={handlePhotoChange}
+            className="hidden"
+          />
+
+          {photos.length > 0 && (
+            <div className="mt-5 grid gap-3">
+              {photos.map((photo, index) => (
+                <div
+                  key={`${photo.name}-${photo.size}-${index}`}
+                  className="flex items-center justify-between gap-4 rounded-xl border border-[#f0d488]/12 bg-[#07120d]/60 px-4 py-3"
+                >
+                  <div>
+                    <p className="break-all text-sm font-bold text-[#fff8df]">
+                      {photo.name}
+                    </p>
+                    <p className="mt-1 text-xs text-[#fff8df]/50">
+                      {formatFileSize(photo.size)}
+                    </p>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => removePhoto(index)}
+                    className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#f0d488]/18 bg-[#fff8df]/[0.06] text-[#fff8df] transition hover:border-red-300/40 hover:bg-red-500/10 hover:text-red-200"
+                    aria-label={`Remove ${photo.name}`}
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {responseMessage && (
