@@ -3,7 +3,6 @@ import Link from "next/link";
 import {
   AlertTriangle,
   ArrowRight,
-  CheckCircle2,
   ClipboardCheck,
   MapPin,
   Phone,
@@ -207,97 +206,58 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#07120d] px-5 py-24 text-white sm:px-6 lg:px-8">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(240,212,136,0.14),transparent_26%),radial-gradient(circle_at_82%_55%,rgba(32,63,41,0.8),transparent_34%),linear-gradient(135deg,#07120d_0%,#10251b_58%,#07120d_100%)]" />
+      <section className="relative overflow-hidden bg-[#07120d] px-5 py-20 text-white sm:px-6 lg:px-8">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(240,212,136,0.12),transparent_26%),radial-gradient(circle_at_82%_55%,rgba(32,63,41,0.7),transparent_34%),linear-gradient(135deg,#07120d_0%,#10251b_58%,#07120d_100%)]" />
 
         <div className="relative mx-auto max-w-7xl">
-          <div className="max-w-3xl">
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-[#f0d488]">
-              Detailed Services
-            </p>
+          <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
+            <div>
+              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#f0d488]">
+                Services
+              </p>
 
-            <h2 className="mt-4 font-serif text-4xl font-black tracking-tight text-[#fff8df] sm:text-5xl">
-              The right service depends on what needs to be fixed.
-            </h2>
+              <h2 className="mt-4 font-serif text-4xl font-black tracking-tight text-[#fff8df] sm:text-5xl">
+                Tree work without the guesswork.
+              </h2>
+            </div>
 
-            <p className="mt-5 text-lg leading-8 text-[#d8d1bf]">
-              High Point handles common residential and commercial tree service
-              needs, from urgent cleanup after wind damage to planned trimming,
-              removal, stump grinding, and property cleanup.
+            <p className="max-w-2xl text-lg leading-8 text-[#d8d1bf] lg:ml-auto">
+              Choose the service that best matches the issue on the property.
+              Each page explains when that service is the right fit and what to
+              include when requesting an estimate.
             </p>
           </div>
 
-          <div className="mt-14 divide-y divide-[#f0d488]/16 border-y border-[#f0d488]/16">
-            {services.map((service, index) => {
+          <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {services.map((service) => {
               const Icon = service.icon;
 
               return (
-                <section
+                <Link
                   key={service.slug}
-                  id={service.slug}
-                  className="scroll-mt-28 grid gap-8 py-12 lg:grid-cols-[0.34fr_0.76fr_0.5fr] lg:gap-10"
+                  href={`/services/${service.slug}`}
+                  className="group rounded-[1.65rem] border border-[#f0d488]/16 bg-[#10251b]/72 p-6 shadow-xl shadow-black/15 transition hover:-translate-y-1 hover:border-[#f0d488]/45 hover:bg-[#183722]"
                 >
-                  <div>
-                    <div className="flex items-center gap-4">
-                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-[#f0d488]/20 bg-[#f0d488]/10 text-[#f0d488]">
-                        <Icon className="h-7 w-7" />
-                      </div>
-
-                      <p className="text-sm font-black tracking-[0.18em] text-[#f0d488]">
-                        {String(index + 1).padStart(2, "0")}
-                      </p>
+                  <div className="flex items-start justify-between gap-5">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#f0d488]/20 bg-[#f0d488]/10 text-[#f0d488]">
+                      <Icon className="h-6 w-6" />
                     </div>
 
-                    <h3 className="mt-6 font-serif text-3xl font-black tracking-tight text-[#fff8df] sm:text-4xl">
-                      {service.title}
-                    </h3>
-
-                    <p className="mt-3 text-sm font-black uppercase tracking-[0.16em] text-[#f0d488]">
-                      {service.eyebrow}
-                    </p>
+                    <ArrowRight className="h-5 w-5 text-[#f0d488] opacity-60 transition group-hover:translate-x-1 group-hover:opacity-100" />
                   </div>
 
-                  <div>
-                    <p className="text-lg leading-8 text-[#d8d1bf]">
-                      {service.body}
-                    </p>
+                  <h3 className="mt-6 font-serif text-2xl font-black tracking-tight text-[#fff8df]">
+                    {service.title}
+                  </h3>
 
-                    <div className="mt-6 border-l-2 border-[#f0d488]/40 pl-5">
-                      <p className="text-sm font-black uppercase tracking-[0.16em] text-[#f0d488]">
-                        Goal
-                      </p>
+                  <p className="mt-2 text-xs font-black uppercase tracking-[0.16em] text-[#f0d488]">
+                    {service.eyebrow}
+                  </p>
 
-                      <p className="mt-2 leading-7 text-[#fff8df]">
-                        {service.outcome}
-                      </p>
-
-                      <Link
-                        href={`/services/${service.slug}`}
-                        className="mt-5 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.14em] text-[#f0d488] transition hover:text-[#fff8df]"
-                      >
-                        Learn more about {service.shortTitle}
-                        <ArrowRight className="h-4 w-4" />
-                      </Link>
-                    </div>
-                  </div>
-
-                  <div className="rounded-[1.5rem] border border-[#f0d488]/15 bg-[#fff8df]/5 p-5">
-                    <p className="text-sm font-black uppercase tracking-[0.16em] text-[#f0d488]">
-                      Common signs
-                    </p>
-
-                    <div className="mt-5 grid gap-3">
-                      {service.signs.map((sign) => (
-                        <div key={sign} className="flex items-start gap-3">
-                          <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#f0d488]" />
-                          <span className="text-sm leading-6 text-[#d8d1bf]">
-                            {sign}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </section>
+                  <p className="mt-4 text-sm leading-7 text-[#d8d1bf]">
+                    {service.outcome}
+                  </p>
+                </Link>
               );
             })}
           </div>

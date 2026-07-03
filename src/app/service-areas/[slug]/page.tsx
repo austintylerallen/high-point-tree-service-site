@@ -210,27 +210,28 @@ export default async function ServiceAreaDetailPage({
       </section>
 
       <section className="relative overflow-hidden bg-[#07120d] px-5 py-20 sm:px-6 lg:px-8">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(240,212,136,0.14),transparent_26%),radial-gradient(circle_at_82%_55%,rgba(32,63,41,0.8),transparent_34%),linear-gradient(135deg,#07120d_0%,#10251b_58%,#07120d_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(240,212,136,0.12),transparent_26%),radial-gradient(circle_at_82%_55%,rgba(32,63,41,0.7),transparent_34%),linear-gradient(135deg,#07120d_0%,#10251b_58%,#07120d_100%)]" />
 
         <div className="relative mx-auto max-w-7xl">
-          <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
+          <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
             <div>
               <p className="text-sm font-black uppercase tracking-[0.24em] text-[#f0d488]">
                 Available Services
               </p>
 
               <h2 className="mt-4 font-serif text-4xl font-black tracking-tight text-[#fff8df] sm:text-5xl">
-                Choose the service that matches the problem.
+                Tree services available in {area.city}.
               </h2>
             </div>
 
-            <p className="text-lg leading-8 text-[#d8d1bf] lg:ml-auto lg:max-w-2xl">
-              The right solution depends on the tree, access, surrounding
-              structures, cleanup needs, and how urgent the concern is.
+            <p className="max-w-2xl text-lg leading-8 text-[#d8d1bf] lg:ml-auto">
+              Start with the closest match below. If the right service is not
+              obvious, High Point can review the concern and recommend the next
+              step.
             </p>
           </div>
 
-          <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {servicePages.map((service) => {
               const Icon = service.icon;
 
@@ -238,22 +239,19 @@ export default async function ServiceAreaDetailPage({
                 <Link
                   key={service.slug}
                   href={`/services/${service.slug}`}
-                  className="group rounded-[1.6rem] border border-[#f0d488]/16 bg-[#10251b]/70 p-6 transition hover:-translate-y-1 hover:border-[#f0d488]/40 hover:bg-[#183722]"
+                  className="group flex items-center justify-between gap-4 rounded-2xl border border-[#f0d488]/16 bg-[#10251b]/72 p-5 transition hover:-translate-y-0.5 hover:border-[#f0d488]/45 hover:bg-[#183722]"
                 >
-                  <Icon className="h-7 w-7 text-[#f0d488]" />
+                  <span className="flex items-center gap-4">
+                    <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#f0d488]/20 bg-[#f0d488]/10 text-[#f0d488]">
+                      <Icon className="h-5 w-5" />
+                    </span>
 
-                  <h3 className="mt-5 font-serif text-2xl font-black text-[#fff8df]">
-                    {service.title}
-                  </h3>
-
-                  <p className="mt-3 text-sm leading-7 text-[#d8d1bf]">
-                    {service.intro}
-                  </p>
-
-                  <span className="mt-5 inline-flex items-center gap-2 text-sm font-black text-[#f0d488]">
-                    Learn more
-                    <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                    <span className="font-black text-[#fff8df]">
+                      {service.navLabel}
+                    </span>
                   </span>
+
+                  <ArrowRight className="h-4 w-4 shrink-0 text-[#f0d488] opacity-70 transition group-hover:translate-x-1 group-hover:opacity-100" />
                 </Link>
               );
             })}

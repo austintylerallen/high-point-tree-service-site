@@ -36,8 +36,9 @@ export default function SiteFooter() {
               </div>
             </div>
 
-            <p className="mt-6 max-w-2xl text-sm leading-7 text-stone-300">
-              {siteConfig.description}
+            <p className="mt-6 max-w-xl text-sm leading-7 text-stone-300">
+              Professional tree removal, trimming, pruning, stump grinding,
+              storm cleanup, and property cleanup across Southern New Mexico.
             </p>
 
             <div className="mt-6 grid gap-2 text-sm text-stone-300">

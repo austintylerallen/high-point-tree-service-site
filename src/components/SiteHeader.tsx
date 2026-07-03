@@ -19,7 +19,7 @@ const navItems = [
     page: "services",
   },
   {
-    label: "Gallery",
+    label: "Work Guide",
     href: "/gallery",
     page: "gallery",
   },
